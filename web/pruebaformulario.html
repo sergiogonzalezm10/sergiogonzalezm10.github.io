@@ -17,6 +17,32 @@
         <!-- Recoge el email-->
         <label for="email">Email:</label>
         <input type="email" id="email" name="correo" placeholder="Email"><br>
+        <label>Edad: </label>
+        <input name="edad" type="checkbox" value="20-39"> 20-39
+        <input name="edad" type="checkbox" value="40-59"> 40-59
+        <input name="edad" type="checkbox" value="60-79"> 60-79<br><br>
+        <label for="estudios">Estudios: </label>
+        <select name="estudios" id="estudios">
+            <optgroup label="Estudios Universitarios">
+                <option>Doctorado</option>
+                <option>Máster</option>
+                <option>Grado</option>
+            </optgroup>
+            <optgroup label="Ciclo Formativo">
+                <option>Grado Superior</option>
+                <option>Grado Medio</option>
+            </optgroup>
+        </select><br><br>
+        <label for="navegador">Elige tu navegador favorito: </label>
+        <input name="navegador" id="navegador" list="browsers">
+        <datalist name="browsers" id="browsers">
+            <option value="Chrome">
+            <option value="Firefox">
+            <option value="Internet Explorer">
+            <option value="Opera">
+            <option value="Safari">
+            <option value="Microsoft Edge">
+        </datalist><br><br>
         <!-- Recoge el mensaje-->
         <label for="message">Mensaje:</label>
         <textarea id="message" name="mensaje" placeholder="Mensaje"></textarea><br>
