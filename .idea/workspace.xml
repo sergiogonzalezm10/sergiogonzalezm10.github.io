@@ -54,6 +54,7 @@
   "keyToString": {
     "DefaultHtmlFileTemplate": "HTML File",
     "JavaScript Debug.ejercicio3.html.executor": "Debug",
+    "JavaScript Debug.ejercicio4.html.executor": "Debug",
     "JavaScript Debug.pruebaformulario.html.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -85,7 +86,7 @@
       <workItem from="1761665850456" duration="304000" />
       <workItem from="1761666238567" duration="302000" />
       <workItem from="1761666577284" duration="846000" />
-      <workItem from="1761813269100" duration="1390000" />
+      <workItem from="1761813269100" duration="1755000" />
     </task>
     <task id="LOCAL-00001" summary="si">
       <option name="closed" value="true" />
@@ -335,7 +336,39 @@
       <option name="project" value="LOCAL" />
       <updated>1761813363627</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="si">
+      <option name="closed" value="true" />
+      <created>1761814671599</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1761814671599</updated>
+    </task>
+    <task id="LOCAL-00033" summary="si">
+      <option name="closed" value="true" />
+      <created>1761814767815</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1761814767815</updated>
+    </task>
+    <task id="LOCAL-00034" summary="si">
+      <option name="closed" value="true" />
+      <created>1761814909850</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1761814909850</updated>
+    </task>
+    <task id="LOCAL-00035" summary="si">
+      <option name="closed" value="true" />
+      <created>1761814979633</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1761814979633</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
