@@ -32,15 +32,32 @@
     <form action="https://www.w3schools.com/action_page.php" method="post">
        <fieldset>
            <label for="name">Nombre:</label>
-             </label> <input type="text" id="name" name="Nombre" placeholder="Nombre y Apellidos">
+           <input type="text" id="name" name="Nombre" placeholder="Nombre y Apellidos">
 
            <label for="email">Email:</label>
-               <input type="email" id="email" name="Email" placeholder="Email" required>
+           <input type="email" id="email" name="Email" placeholder="Email" required>
 
        </fieldset>
 
+        <fieldset>
+            <legend>Tipo de Entrada</legend>
 
+            <label>
+                <input type="radio" name="tipo_entrada">
+                Abono General (3 Días)
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="tipo_entrada">
+                Abono VIP (3 Días)
+            </label>
+            <br>
 
+            <label>
+                <input type="radio" name="tipo_entrada">
+                Entrada de Día
+            </label>
+        </fieldset>
     </form>
 </main>
 
