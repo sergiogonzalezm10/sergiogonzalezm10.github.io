@@ -16,7 +16,7 @@
 <body>
 <h1>Formulario de Contacto</h1>
 
-<form action="https://lm.ciclo.iesnervion.es/form3/envio.php" method="post">
+<form action="https://lm.ciclo.iesnervion.es/form3/envio.php" method="post" enctype="multipart/form-data">
     <label for="nombre">Nombre:</label><br>
     <input type="text" id="nombre" name="nombre"><br><br>
 
@@ -27,7 +27,7 @@
     <textarea id="mensaje" name="mensaje" rows="5" cols="30"></textarea><br><br>
 
     <label for="imagen">Subir imagen:</label><br>
-    <input type="file" id="imagen" name="imagen" width="300"><br><br>
+    <input type="file" id="imagen" name="imagen"><br><br>
 
     <button type="submit">Enviar</button>
 </form>
