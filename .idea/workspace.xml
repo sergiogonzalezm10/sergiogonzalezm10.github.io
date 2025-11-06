@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21538386-c4a9-4507-9ed9-522d34cc05eb" name="Changes" comment="si">
-      <change beforePath="$PROJECT_DIR$/CodeFest/Index.html" beforeDir="false" afterPath="$PROJECT_DIR$/CodeFest/Index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/ejercicio4.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/ejercicio4.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/pruebaformulario.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/pruebaformulario.html" afterDir="false" />
-    </list>
+    <list default="true" id="21538386-c4a9-4507-9ed9-522d34cc05eb" name="Changes" comment="si" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,12 +31,12 @@
     &quot;assignee&quot;: &quot;sergiogonzalezm10&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io.git",
-    "accountId": "33d48815-8d8d-4595-864b-c7bcdcf08781"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io.git&quot;,
+    &quot;accountId&quot;: &quot;33d48815-8d8d-4595-864b-c7bcdcf08781&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -52,31 +48,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "JavaScript Debug.CodeFest.html.executor": "Debug",
-    "JavaScript Debug.CodeFestindex.html.executor": "Debug",
-    "JavaScript Debug.Index.html.executor": "Debug",
-    "JavaScript Debug.about.html.executor": "Debug",
-    "JavaScript Debug.ejercicio2.html.executor": "Debug",
-    "JavaScript Debug.ejercicio3.html.executor": "Debug",
-    "JavaScript Debug.ejercicio4.html.executor": "Debug",
-    "JavaScript Debug.index.html.executor": "Debug",
-    "JavaScript Debug.prueba.html.executor": "Debug",
-    "JavaScript Debug.pruebaformulario.html.executor": "Debug",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;JavaScript Debug.CodeFest.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.CodeFestindex.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.Index.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.about.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.ejercicio2.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.ejercicio3.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.ejercicio4.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.index.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.prueba.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.pruebaformulario.html.executor&quot;: &quot;Debug&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -96,6 +92,7 @@
       <workItem from="1761666238567" duration="302000" />
       <workItem from="1761666577284" duration="846000" />
       <workItem from="1761813269100" duration="5705000" />
+      <workItem from="1762417460201" duration="7000" />
     </task>
     <task id="LOCAL-00001" summary="si">
       <option name="closed" value="true" />
