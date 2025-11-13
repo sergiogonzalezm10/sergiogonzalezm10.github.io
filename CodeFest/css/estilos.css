@@ -94,14 +94,14 @@ h2, h3 {
     padding-bottom: 5px;
 }
 
-/* Hacemos que imágenes y vídeos sean "responsive" */
+/* Hacemos que imágenes y vídeos sean "responsive"
 img, iframe, video, audio {
     max-width: 100%;
     height: auto;
-    border-radius: 5px; /* Bordes redondeados sutiles */
+    border-radius: 5px; /* Bordes redondeados sutiles
     margin-top: 10px;
 }
-
+*/
 /* --- TABLAS (Ejercicio 3: Cartel) --- */
 table {
     width: 100%;
