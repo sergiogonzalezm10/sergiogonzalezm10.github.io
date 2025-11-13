@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21538386-c4a9-4507-9ed9-522d34cc05eb" name="Changes" comment="si">
-      <change beforePath="$PROJECT_DIR$/CodeFest/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/CodeFest/index.html" afterDir="false" />
-    </list>
+    <list default="true" id="21538386-c4a9-4507-9ed9-522d34cc05eb" name="Changes" comment="si" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -102,7 +100,7 @@
       <workItem from="1761666577284" duration="846000" />
       <workItem from="1761813269100" duration="5705000" />
       <workItem from="1762417459809" duration="5909000" />
-      <workItem from="1763019239746" duration="388000" />
+      <workItem from="1763019239746" duration="968000" />
     </task>
     <task id="LOCAL-00001" summary="si">
       <option name="closed" value="true" />
