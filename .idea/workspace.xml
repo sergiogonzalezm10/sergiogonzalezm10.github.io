@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21538386-c4a9-4507-9ed9-522d34cc05eb" name="Changes" comment="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CodeFest/css/estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/CodeFest/css/estilos.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CodeFest/web/cartel.html" beforeDir="false" afterPath="$PROJECT_DIR$/CodeFest/web/cartel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CodeFest/web/entradas.html" beforeDir="false" afterPath="$PROJECT_DIR$/CodeFest/web/entradas.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CodeFest/web/localizacion.html" beforeDir="false" afterPath="$PROJECT_DIR$/CodeFest/web/localizacion.html" afterDir="false" />
-    </list>
+    <list default="true" id="21538386-c4a9-4507-9ed9-522d34cc05eb" name="Changes" comment="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -108,7 +102,7 @@
       <workItem from="1761813269100" duration="5705000" />
       <workItem from="1762417459809" duration="5909000" />
       <workItem from="1763019239746" duration="968000" />
-      <workItem from="1763023344702" duration="4533000" />
+      <workItem from="1763023344702" duration="4846000" />
     </task>
     <task id="LOCAL-00001" summary="si">
       <option name="closed" value="true" />
@@ -470,7 +464,31 @@
       <option name="project" value="LOCAL" />
       <updated>1763026780657</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io">
+      <option name="closed" value="true" />
+      <created>1763027962333</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1763027962333</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io">
+      <option name="closed" value="true" />
+      <created>1763028003412</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1763028003412</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io">
+      <option name="closed" value="true" />
+      <created>1763028115020</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1763028115020</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -479,6 +497,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="SI" />
     <MESSAGE value="si" />
+    <MESSAGE value="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
     <MESSAGE value="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io" />
     <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io" />
   </component>
