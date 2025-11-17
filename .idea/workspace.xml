@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21538386-c4a9-4507-9ed9-522d34cc05eb" name="Changes" comment="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io">
-      <change afterPath="$PROJECT_DIR$/CodeFest/web/tablaprueba.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeFest/web/entradas.html" beforeDir="false" afterPath="$PROJECT_DIR$/CodeFest/web/entradas.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeFest/web/tablaprueba.html" beforeDir="false" afterPath="$PROJECT_DIR$/CodeFest/web/tablaprueba.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +108,7 @@
       <workItem from="1762417459809" duration="5909000" />
       <workItem from="1763019239746" duration="968000" />
       <workItem from="1763023344702" duration="5458000" />
-      <workItem from="1763378680483" duration="3122000" />
+      <workItem from="1763378680483" duration="4722000" />
     </task>
     <task id="LOCAL-00004" summary="si">
       <option name="closed" value="true" />
