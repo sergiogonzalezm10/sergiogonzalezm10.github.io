@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21538386-c4a9-4507-9ed9-522d34cc05eb" name="Changes" comment="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io" />
+    <list default="true" id="21538386-c4a9-4507-9ed9-522d34cc05eb" name="Changes" comment="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io">
+      <change afterPath="$PROJECT_DIR$/CodeFest/web/tablaprueba.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,34 +52,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;JavaScript Debug.CodeFest.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.CodeFestindex.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.Index.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.about.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.cartel.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.ejercicio2.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.ejercicio3.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.ejercicio4.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.entradas.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.index.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.localizacion.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.prueba.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.pruebaformulario.html.executor&quot;: &quot;Debug&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "JavaScript Debug.CodeFest.html.executor": "Debug",
+    "JavaScript Debug.CodeFestindex.html.executor": "Debug",
+    "JavaScript Debug.Index.html.executor": "Debug",
+    "JavaScript Debug.about.html.executor": "Debug",
+    "JavaScript Debug.cartel.html.executor": "Debug",
+    "JavaScript Debug.ejercicio2.html.executor": "Debug",
+    "JavaScript Debug.ejercicio3.html.executor": "Debug",
+    "JavaScript Debug.ejercicio4.html.executor": "Debug",
+    "JavaScript Debug.entradas.html.executor": "Debug",
+    "JavaScript Debug.index.html.executor": "Debug",
+    "JavaScript Debug.localizacion.html.executor": "Debug",
+    "JavaScript Debug.prueba.html.executor": "Debug",
+    "JavaScript Debug.pruebaformulario.html.executor": "Debug",
+    "JavaScript Debug.tablaprueba.html.executor": "Debug",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\sergio.gonzalezm\Documents\GitHub\sergiogonzalezm10.github.io\CodeFest\img" />
@@ -103,6 +108,7 @@
       <workItem from="1762417459809" duration="5909000" />
       <workItem from="1763019239746" duration="968000" />
       <workItem from="1763023344702" duration="5458000" />
+      <workItem from="1763378680483" duration="3122000" />
     </task>
     <task id="LOCAL-00004" summary="si">
       <option name="closed" value="true" />
