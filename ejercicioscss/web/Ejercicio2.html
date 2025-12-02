@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio2</title>
+    <style>
+    #div1{
+        width: 200px;
+        height: 200px;
+        background-image: url('../img/messicalvo.jpg');
+        background-position-x: center;
+        background-position-y: center;
+        background-size: 50px;
+        background-repeat: no-repeat;
+        border: 5px solid black;
+    }
+    #div2{
+        width: 200px;
+        height: 200px;
+        background-image: url('../img/messicalvo.jpg');
+        background-position: bottom;
+        background-size: 50px;
+        background-repeat: repeat-x;
+        border: 5px dashed red;
+    }
+
+    #div3{
+        width: 200px;
+        height: 200px;
+        background-image: url('../img/messicalvo.jpg');
+        background-position: right;
+        background-size: 50px;
+        background-repeat: repeat-y;
+        border: 5px double blue;
+    }
+     .tabla {
+         width: 50%;
+         margin: 0 auto;
+         border-collapse: separate;
+         border-spacing: 2px;
+         border: 1px solid;
+     }
+
+    .tabla td {
+        border: 1px solid;
+        padding: 10px;
+    }
+    .contenedor-tabla {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        width: 50%;
+        margin: 0 auto;
+        border: 1px solid;
+        padding: 2px;
+        gap: 2px;
+    }
+    .caja {
+        border: 1px solid;
+        padding: 10px;
+    }
+    </style>
+</head>
+<body>
+
+<table class="tabla">
+    <tr>
+        <td>Tutoriales En Linea 1</td>
+        <td>Tutoriales En Linea 2</td>
+        <td>Tutoriales En Linea 3</td>
+    </tr>
+    <tr>
+        <td>Tutoriales En Linea 1</td>
+        <td>Tutoriales En Linea 2</td>
+        <td>Tutoriales En Linea 3</td>
+    </tr>
+</table>
+    <div class="contenedor-tabla">
+        <div class="caja">Tutoriales En Linea 1</div>
+        <div class="caja">Tutoriales En Linea 2</div>
+        <div class="caja">Tutoriales En Linea 3</div>
+
+        <div class="caja">Tutoriales En Linea 1</div>
+        <div class="caja">Tutoriales En Linea 2</div>
+        <div class="caja">Tutoriales En Linea 3</div>
+    </div>
+
+    </body>
+</html>
+</body>
+</html>

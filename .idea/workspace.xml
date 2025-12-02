@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21538386-c4a9-4507-9ed9-522d34cc05eb" name="Changes" comment="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io" />
+    <list default="true" id="21538386-c4a9-4507-9ed9-522d34cc05eb" name="Changes" comment="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io">
+      <change afterPath="$PROJECT_DIR$/ejercicioscss/img/messicalvo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ejercicioscss/web/Ejercicio2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,8 +17,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="CSS File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -55,6 +59,7 @@
     "JavaScript Debug.CodeFest.html.executor": "Debug",
     "JavaScript Debug.CodeFestindex.html.executor": "Debug",
     "JavaScript Debug.Ejercicio1.html.executor": "Debug",
+    "JavaScript Debug.Ejercicio2.html.executor": "Debug",
     "JavaScript Debug.Index.html.executor": "Debug",
     "JavaScript Debug.Iniciacion.html.executor": "Debug",
     "JavaScript Debug.about.html.executor": "Debug",
@@ -85,6 +90,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\sergio.gonzalezm\Documents\GitHub\sergiogonzalezm10.github.io\ejercicioscss\img" />
       <recent name="C:\Users\sergio.gonzalezm\Documents\GitHub\sergiogonzalezm10.github.io\CodeFest\img" />
     </key>
   </component>
@@ -118,22 +124,7 @@
       <workItem from="1763625222404" duration="1977000" />
       <workItem from="1764055770421" duration="4655000" />
       <workItem from="1764231861420" duration="6579000" />
-    </task>
-    <task id="LOCAL-00012" summary="si">
-      <option name="closed" value="true" />
-      <created>1761208250561</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1761208250561</updated>
-    </task>
-    <task id="LOCAL-00013" summary="si">
-      <option name="closed" value="true" />
-      <created>1761208444706</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1761208444706</updated>
+      <workItem from="1764659961331" duration="3509000" />
     </task>
     <task id="LOCAL-00014" summary="si">
       <option name="closed" value="true" />
@@ -511,7 +502,23 @@
       <option name="project" value="LOCAL" />
       <updated>1764238378281</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io">
+      <option name="closed" value="true" />
+      <created>1764660146904</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1764660146904</updated>
+    </task>
+    <task id="LOCAL-00062" summary="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io">
+      <option name="closed" value="true" />
+      <created>1764660222866</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1764660222866</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
