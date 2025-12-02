@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21538386-c4a9-4507-9ed9-522d34cc05eb" name="Changes" comment="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io">
-      <change beforePath="$PROJECT_DIR$/ejercicioscss/css/Estilos1.css" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicioscss/css/Estilos1.css" afterDir="false" />
-    </list>
+    <list default="true" id="21538386-c4a9-4507-9ed9-522d34cc05eb" name="Changes" comment="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -119,15 +117,7 @@
       <workItem from="1763625156336" duration="50000" />
       <workItem from="1763625222404" duration="1977000" />
       <workItem from="1764055770421" duration="4655000" />
-      <workItem from="1764231861420" duration="6468000" />
-    </task>
-    <task id="LOCAL-00011" summary="si">
-      <option name="closed" value="true" />
-      <created>1761208152657</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1761208152657</updated>
+      <workItem from="1764231861420" duration="6579000" />
     </task>
     <task id="LOCAL-00012" summary="si">
       <option name="closed" value="true" />
@@ -513,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764238045880</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io">
+      <option name="closed" value="true" />
+      <created>1764238378281</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1764238378281</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
