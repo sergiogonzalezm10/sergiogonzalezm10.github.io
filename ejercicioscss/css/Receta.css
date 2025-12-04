@@ -1,0 +1,79 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tarjeta-receta {
+    background-color: #fff;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.encabezado-receta {
+    background-color: #ff6b6b;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.cuerpo-receta {
+    padding: 20px;
+}
+
+.Ingredientes,
+.Preparación {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff0f0;
+    border-radius: 8px;
+}
+
+.PieReceta {
+    background-color: #eee;
+    padding: 15px;
+    text-align: center;
+    font-size: 0.9em;
+    border-top: 1px solid #ddd;
+}
+
+h2 {
+    color: #d64545;
+    margin-bottom: 10px;
+}
+
+/* --- MEDIA QUERY (Para Tablet y Escritorio) --- */
+@media (min-width: 600px) {
+
+    .cuerpo-receta {
+        display: flex; /* ¡Aquí ocurre la magia! */
+        gap: 20px;     /* Espacio entre las dos columnas */
+    }
+
+    .seccion-ingredientes {
+        flex: 1; /* Toma 1 parte del espacio disponible (aprox 33%) */
+        margin-bottom: 0; /* Ya no necesitamos el margen inferior */
+    }
+
+    .seccion-preparacion {
+        flex: 2; /* Toma 2 partes del espacio (es más ancha porque tiene más texto) */
+        margin-bottom: 0;
+    }
+}

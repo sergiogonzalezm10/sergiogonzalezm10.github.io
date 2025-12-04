@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TablaEjemplo</title>
+    <head>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css">
+    </head>
+</head>
+<body>
+<table id="miTablaEjemplo">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Posición</th>
+        <th>Oficina</th>
+        <th>Edad</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Ana García</td>
+        <td>Desarrolladora</td>
+        <td>Madrid</td>
+        <td>32</td>
+    </tr>
+    <tr>
+        <td>Luis Sanz</td>
+        <td>Diseñador</td>
+        <td>Barcelona</td>
+        <td>28</td>
+    </tr>
+    </tbody>
+</table>
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#miTablaEjemplo').DataTable();
+    });
+</script>
+</body>
+</html>

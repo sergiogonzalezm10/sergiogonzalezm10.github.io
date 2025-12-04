@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receta de Tortilla</title>
+    <link rel="stylesheet" href="estilo-receta.css">
+    <style>
+        * {
+            box-sizing: border-box; /* Fundamental para que el padding no rompa el ancho */
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4; /* Un gris suave de fondo para la página */
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+
+            /* Centramos la tarjeta en la pantalla vertical y horizontalmente */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- LA TARJETA (CARD) --- */
+        .tarjeta-receta {
+            background-color: #fff;
+            width: 100%;         /* Ocupa todo el ancho disponible en móviles */
+            max-width: 800px;    /* Pero nunca será más ancha de 800px */
+            border-radius: 12px; /* Bordes redondeados modernos */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Sombra suave para efecto "tarjeta" */
+            overflow: hidden;    /* Asegura que nada se salga de los bordes redondeados */
+        }
+
+        /* --- ESTILOS INTERNOS --- */
+        .encabezado-receta {
+            background-color: #ff6b6b; /* Un color coral atractivo */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .cuerpo-receta {
+            padding: 20px;
+            /* Nota: Aquí NO ponemos display: flex todavía.
+               Por defecto, los divs se apilan uno sobre otro, que es lo que queremos en móvil. */
+        }
+
+        .seccion-ingredientes,
+        .seccion-preparacion {
+            margin-bottom: 20px; /* Separación entre bloques en móvil */
+            padding: 15px;
+            background-color: #fff0f0; /* Un fondo muy sutil para diferenciar secciones */
+            border-radius: 8px;
+        }
+
+        .pie-receta {
+            background-color: #eee;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.9em;
+            border-top: 1px solid #ddd;
+        }
+
+        h2 {
+            color: #d64545;
+            margin-bottom: 10px;
+        }
+        @media (min-width: 600px) {
+
+            .cuerpo-receta {
+                display: flex; /* ¡Aquí ocurre la magia! */
+                gap: 20px;     /* Espacio entre las dos columnas */
+            }
+
+            .seccion-ingredientes {
+                flex: 1; /* Toma 1 parte del espacio disponible (aprox 33%) */
+                margin-bottom: 0; /* Ya no necesitamos el margen inferior */
+            }
+
+            .seccion-preparacion {
+                flex: 2; /* Toma 2 partes del espacio (es más ancha porque tiene más texto) */
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="tarjeta-receta">
+
+    <header class="encabezado-receta">
+        <h1>Receta de la tortilla francesa</h1>
+    </header>
+
+    <div class="Receta">
+
+        <div class="Ingredientes">
+            <h2>Ingredientes:</h2>
+            <ul>
+                <li>Huevos</li>
+                <li>Aceite</li>
+                <li>Sal</li>
+            </ul>
+        </div>
+
+        <div class="Preparación">
+            <h2>Preparación:</h2>
+            <ol>
+                <li>Calentar el aceite en una sartén</li>
+                <li>Cascar el huevo y batirlo</li>
+                <li>Verter el huevo batido en la sartén</li>
+                <li>Esperar un par de minutos, voltear y volver a esperar.</li>
+            </ol>
+        </div>
+
+    </div> <div class="PieReceta">
+    <p><strong>Tip:</strong> Servir con mayonesa, tomate o jamón.</p>
+</div>
+
+</div> </body>
+</html>

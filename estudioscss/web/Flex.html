@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flex</title>
+    <style>
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background-color: lightgreen;
+            border: 1px double darkred;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: baseline;
+        }
+        .item {
+            background-color: lightyellow;
+            width: 100px;
+            height: 100px;
+            border: 1px solid blue;
+            text-align: center;
+            display: flex;
+        }
+        .tarjetas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .Tarjeta {
+            flex: 1 1 30%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item">Elemento 1</div>
+        <div class="item">Elemento 2</div>
+        <div class="item">Elemento 3</div>
+    </div>
+    <br><br>
+<div class="tarjetas">
+    <div class="Tarjeta">Tarjeta 1</div>
+    <div class="Tarjeta">Tarjeta 2</div>
+    <div class="Tarjeta">Tarjeta 3</div>
+
+</div>
+
+<div class=""
+</body>
+</html>

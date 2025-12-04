@@ -5,9 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21538386-c4a9-4507-9ed9-522d34cc05eb" name="Changes" comment="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io">
-      <change afterPath="$PROJECT_DIR$/ejercicioscss/img/messicalvo.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ejercicioscss/web/Ejercicio2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ejercicioscss/web/Maquetación de una Receta Responsiva.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/estudioscss/web/CajaSimple.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/estudioscss/web/Ejercicio3.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/estudioscss/web/Flex.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicioscss/css/Estilos1.css" beforeDir="false" afterPath="$PROJECT_DIR$/estudioscss/css/Estilos1.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicioscss/img/messicalvo.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/estudioscss/img/messicalvo.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicioscss/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/estudioscss/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicioscss/web/Ejercicio1.html" beforeDir="false" afterPath="$PROJECT_DIR$/estudioscss/web/Ejercicio1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejercicioscss/web/Ejercicio2.html" beforeDir="false" afterPath="$PROJECT_DIR$/estudioscss/web/Ejercicio2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,12 +64,16 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "DefaultHtmlFileTemplate": "HTML File",
+    "JavaScript Debug.CajaSimple.html.executor": "Debug",
     "JavaScript Debug.CodeFest.html.executor": "Debug",
     "JavaScript Debug.CodeFestindex.html.executor": "Debug",
     "JavaScript Debug.Ejercicio1.html.executor": "Debug",
     "JavaScript Debug.Ejercicio2.html.executor": "Debug",
+    "JavaScript Debug.Ejercicio3.html.executor": "Debug",
+    "JavaScript Debug.Flex.html.executor": "Debug",
     "JavaScript Debug.Index.html.executor": "Debug",
     "JavaScript Debug.Iniciacion.html.executor": "Debug",
+    "JavaScript Debug.Maquetación de una Receta Responsiva.html.executor": "Debug",
     "JavaScript Debug.about.html.executor": "Debug",
     "JavaScript Debug.cartel.html.executor": "Debug",
     "JavaScript Debug.ejercicio2.html.executor": "Debug",
@@ -124,15 +136,8 @@
       <workItem from="1763625222404" duration="1977000" />
       <workItem from="1764055770421" duration="4655000" />
       <workItem from="1764231861420" duration="6579000" />
-      <workItem from="1764659961331" duration="3509000" />
-    </task>
-    <task id="LOCAL-00014" summary="si">
-      <option name="closed" value="true" />
-      <created>1761208597628</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1761208597628</updated>
+      <workItem from="1764659961331" duration="3841000" />
+      <workItem from="1764836494939" duration="6358000" />
     </task>
     <task id="LOCAL-00015" summary="si">
       <option name="closed" value="true" />
@@ -518,7 +523,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764660222866</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io">
+      <option name="closed" value="true" />
+      <created>1764663799787</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1764663799787</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
