@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perros Aleatorios</title>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #imagen {
+            width: 800px;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+            margin-top: 20px;
+        }
+</style>
+</head>
+<body>
+<h1>Galería de Perros</h1>
+
+<button id="botonAleatorio">Aleatorio</button>
+<select id="selector"></select>
+
+<br><br>
+<img id="imagen" src="" alt="">
+
+<script>
+    const boton = document.getElementById("botonAleatorio");
+    const selector = document.getElementById("selector");
+    const imagen = document.getElementById("imagen");
+
+    async function cargarRazas() {
+        const res = await fetch("https://dog.ceo/api/breeds/list/all");
+        const data = await res.json();
+        const breeds = data.message;
+
+        selector.innerHTML = "";
+
+        for (let breed in breeds) {
+            if (breeds[breed].length === 0) {
+                const option = document.createElement("option");
+                option.value = breed;
+                option.textContent = breed;
+                selector.appendChild(option);
+            } else {
+                breeds[breed].forEach(sub => {
+                    const option = document.createElement("option");
+                    option.value = breed + "-" + sub;
+                    option.textContent = breed + " - " + sub;
+                    selector.appendChild(option);
+                });
+            }
+        }
+    }
+
+    async function mostrarAleatorio() {
+        const res = await fetch("https://dog.ceo/api/breeds/image/random");
+        const data = await res.json();
+        imagen.src = data.message;
+    }
+
+    async function mostrarPorRaza(valor) {
+        let url = "";
+        if (valor.includes("-")) {
+            const partes = valor.split("-");
+            url = "https://dog.ceo/api/breed/" + partes[0] + "/" + partes[1] + "/images/random";
+        } else {
+            url = "https://dog.ceo/api/breed/" + valor + "/images/random";
+        }
+        const res = await fetch(url);
+        const data = await res.json();
+        imagen.src = data.message;
+    }
+
+    boton.addEventListener("click", mostrarAleatorio);
+
+    selector.addEventListener("change", function () {
+        mostrarPorRaza(this.value);
+    });
+
+    cargarRazas();
+</script>
+</body>
+</html>
