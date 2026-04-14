@@ -2,22 +2,394 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Mi Sitio Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sergio González</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --cr: #ff2d2d;
+            --cy: #ffe600;
+            --cw: #f0ede6;
+            --cb: #0a0a0a;
+        }
+
+        html, body {
+            background: var(--cb);
+            min-height: 100vh;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            background-size: 200px;
+            pointer-events: none;
+            z-index: 999;
+            opacity: .5;
+        }
+
+        .pagina {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;
+        }
+
+        /* IZQUIERDA */
+        .izq {
+            background: var(--cr);
+            padding: 48px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .izq::before {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 280px;
+            height: 280px;
+            background: var(--cy);
+            border-radius: 50%;
+            mix-blend-mode: multiply;
+            opacity: .45;
+        }
+
+        .nombre-grande {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(4rem, 8vw, 7rem);
+            line-height: .9;
+            color: var(--cb);
+            letter-spacing: -.01em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nombre-grande span { display: block; color: var(--cw); }
+
+        .rol {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: var(--cb);
+            border-top: 2px solid var(--cb);
+            padding-top: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contador {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(6rem, 14vw, 11rem);
+            color: var(--cb);
+            opacity: .12;
+            position: absolute;
+            bottom: 30px;
+            right: -10px;
+            line-height: 1;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* DERECHA */
+        .der {
+            background: var(--cb);
+            overflow-y: auto;
+        }
+
+        .der-header {
+            padding: 48px 40px 32px;
+            border-bottom: 1px solid #222;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .titulo-seccion {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            letter-spacing: .4em;
+            color: #444;
+            text-transform: uppercase;
+        }
+
+        .badge {
+            background: var(--cy);
+            color: var(--cb);
+            font-family: 'Space Mono', monospace;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .15em;
+            padding: 4px 10px;
+            text-transform: uppercase;
+        }
+
+        /* LISTA */
+        .lista { list-style: none; }
+
+        .item {
+            border-bottom: 1px solid #1a1a1a;
+            opacity: 0;
+            transform: translateX(30px);
+            animation: entrar .4s forwards;
+        }
+
+        .item:nth-child(1) { animation-delay: .05s; }
+        .item:nth-child(2) { animation-delay: .10s; }
+        .item:nth-child(3) { animation-delay: .15s; }
+        .item:nth-child(4) { animation-delay: .20s; }
+        .item:nth-child(5) { animation-delay: .25s; }
+        .item:nth-child(6) { animation-delay: .30s; }
+        .item:nth-child(7) { animation-delay: .35s; }
+        .item:nth-child(8) { animation-delay: .40s; }
+
+        @keyframes entrar {
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .enlace {
+            display: grid;
+            grid-template-columns: 56px 1fr auto;
+            align-items: center;
+            text-decoration: none;
+            color: var(--cw);
+            min-height: 78px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enlace::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--cr);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .25s cubic-bezier(.77,0,.18,1);
+            z-index: 0;
+        }
+
+        .enlace:hover::after { transform: scaleX(1); }
+        .enlace:hover .n-num,
+        .enlace:hover .n-texto,
+        .enlace:hover .n-flecha { color: var(--cb); }
+
+        .n-num {
+            font-family: 'Space Mono', monospace;
+            font-size: 9px;
+            color: #333;
+            padding-left: 40px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: .1em;
+            transition: color .15s;
+        }
+
+        .n-texto {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.4rem, 2.8vw, 2rem);
+            letter-spacing: .04em;
+            line-height: 1;
+            color: var(--cw);
+            position: relative;
+            z-index: 1;
+            transition: color .15s;
+        }
+
+        .n-sub {
+            display: block;
+            font-family: 'Space Mono', monospace;
+            font-size: 9px;
+            color: #444;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            margin-top: 4px;
+            font-weight: 400;
+            transition: color .15s;
+        }
+
+        .enlace:hover .n-sub { color: rgba(10,10,10,.55); }
+
+        .n-flecha {
+            font-family: 'Space Mono', monospace;
+            font-size: 18px;
+            color: #2a2a2a;
+            padding-right: 40px;
+            position: relative;
+            z-index: 1;
+            transition: color .15s, transform .2s;
+        }
+
+        .enlace:hover .n-flecha { transform: translateX(6px); }
+
+        .item.destacado { background: #111; }
+        .item.destacado .n-texto { color: var(--cy); }
+        .item.destacado .enlace:hover .n-texto { color: var(--cb); }
+
+        /* FOOTER */
+        .der-footer {
+            padding: 32px 40px;
+            border-top: 1px solid #1a1a1a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .der-footer span {
+            font-family: 'Space Mono', monospace;
+            font-size: 9px;
+            letter-spacing: .2em;
+            color: #333;
+            text-transform: uppercase;
+        }
+
+        .semaforo { display: flex; gap: 6px; }
+        .semaforo div { width: 8px; height: 8px; border-radius: 50%; }
+        .semaforo div:nth-child(1) { background: var(--cr); }
+        .semaforo div:nth-child(2) { background: var(--cy); }
+        .semaforo div:nth-child(3) { background: #1d9e75; }
+
+        /* GLITCH */
+        .glitch { position: relative; }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0; left: 0;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: inherit;
+            line-height: inherit;
+            pointer-events: none;
+        }
+
+        .glitch::before {
+            color: var(--cy);
+            animation: glitch1 6s 2s infinite;
+        }
+
+        .glitch::after {
+            color: var(--cw);
+            animation: glitch1 6s 3.5s infinite reverse;
+        }
+
+        @keyframes glitch1 {
+            0%,100% { clip-path: inset(0 0 100% 0); transform: translate(0); }
+            10%  { clip-path: inset(10% 0 60% 0); transform: translate(-3px, 1px); }
+            20%  { clip-path: inset(50% 0 20% 0); transform: translate(3px, -1px); }
+            30%  { clip-path: inset(80% 0 5% 0);  transform: translate(-2px, 2px); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+            .pagina { grid-template-columns: 1fr; }
+            .izq { position: static; height: auto; min-height: 240px; padding: 36px 28px 32px; }
+            .der-header { padding: 28px 28px 20px; }
+            .n-num { padding-left: 28px; }
+            .n-flecha { padding-right: 28px; }
+            .der-footer { padding: 24px 28px; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Ejercicios de Clase</h1>
-    <h2>Sergio González</h2>
+<div class="pagina">
 
-    <h3>Ejercicios:</h3>
-    <ul>
-        <li><a href="web/about.html">Ejercicio: Sobre mí</a></li>
-        <li><a href="web/pruebaformulario.html">Prueba formulario</a></li>
-        <li><a href="web/ejercicio2.html">Ejercicio: Tablas y Enlaces </a></li>
-        <li><a href="web/ejercicio3.html">Ejercicio: Formulario de Contacto</a></li>
-        <li><a href="web/ejercicio4.html">Ejercicio: Incluir código embebido</a></li>
-        <li><a href="CodeFest/index.html">Festival</a></li>
-        <li><a href="estudioscss/web/Ejercicio1.html">Ejercicios CSS</a></li>
-        <li><a href="js/Ejercicios%20APIs">Ejercicios JS</a></li>
-    </ul>
+    <aside class="izq">
+        <div>
+            <div class="nombre-grande">
+                <span class="glitch" data-text="SERGIO">SERGIO</span>
+                GONZÁLEZ
+            </div>
+        </div>
+        <p class="rol">DAM · Programación Web · 2025</p>
+        <div class="contador" aria-hidden="true">08</div>
+    </aside>
+
+    <main class="der">
+        <div class="der-header">
+            <span class="titulo-seccion">Ejercicios de clase</span>
+            <span class="badge">8 proyectos</span>
+        </div>
+
+        <ul class="lista">
+            <li class="item">
+                <a class="enlace" href="web/about.html">
+                    <span class="n-num">01</span>
+                    <span class="n-texto">Sobre mí<span class="n-sub">Página personal</span></span>
+                    <span class="n-flecha">→</span>
+                </a>
+            </li>
+            <li class="item">
+                <a class="enlace" href="web/pruebaformulario.html">
+                    <span class="n-num">02</span>
+                    <span class="n-texto">Prueba formulario<span class="n-sub">HTML forms</span></span>
+                    <span class="n-flecha">→</span>
+                </a>
+            </li>
+            <li class="item">
+                <a class="enlace" href="web/ejercicio2.html">
+                    <span class="n-num">03</span>
+                    <span class="n-texto">Tablas y enlaces<span class="n-sub">Estructura HTML</span></span>
+                    <span class="n-flecha">→</span>
+                </a>
+            </li>
+            <li class="item">
+                <a class="enlace" href="web/ejercicio3.html">
+                    <span class="n-num">04</span>
+                    <span class="n-texto">Formulario de contacto<span class="n-sub">Validación y estilos</span></span>
+                    <span class="n-flecha">→</span>
+                </a>
+            </li>
+            <li class="item">
+                <a class="enlace" href="web/ejercicio4.html">
+                    <span class="n-num">05</span>
+                    <span class="n-texto">Código embebido<span class="n-sub">iframes · embeds</span></span>
+                    <span class="n-flecha">→</span>
+                </a>
+            </li>
+            <li class="item destacado">
+                <a class="enlace" href="CodeFest/index.html">
+                    <span class="n-num">06</span>
+                    <span class="n-texto">Festival<span class="n-sub">CodeFest · proyecto</span></span>
+                    <span class="n-flecha">→</span>
+                </a>
+            </li>
+            <li class="item">
+                <a class="enlace" href="estudioscss/web/Ejercicio1.html">
+                    <span class="n-num">07</span>
+                    <span class="n-texto">Ejercicios CSS<span class="n-sub">Selectores · layouts</span></span>
+                    <span class="n-flecha">→</span>
+                </a>
+            </li>
+            <li class="item">
+                <a class="enlace" href="js/Ejercicios%20APIs">
+                    <span class="n-num">08</span>
+                    <span class="n-texto">Ejercicios JS<span class="n-sub">APIs · fetch · DOM</span></span>
+                    <span class="n-flecha">→</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="der-footer">
+            <span>Sergio González · DAM 2025</span>
+            <div class="semaforo">
+                <div></div><div></div><div></div>
+            </div>
+        </div>
+    </main>
+
+</div>
 </body>
 </html>
