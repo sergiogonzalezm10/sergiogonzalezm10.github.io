@@ -5,9 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21538386-c4a9-4507-9ed9-522d34cc05eb" name="Changes" comment="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io">
-      <change afterPath="$PROJECT_DIR$/js/Ejercicios APIs/ConsultaUsuarios.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/Ejercicios APIs/ej1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/Ejercicios APIs/ej1reto.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/Ejercicios APIs/ej2JQuery.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/Ejercicios APIs/ej2mega.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/Ejercicios APIs/ej2reto.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Ejercicios APIs/ConsultaUsuarios.html" beforeDir="false" afterPath="$PROJECT_DIR$/js/Ejercicios APIs/ej2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/Ejercicios APIs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/js/Ejercicios APIs/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -140,15 +144,9 @@
       <workItem from="1765364083823" duration="4393000" />
       <workItem from="1765438091485" duration="209000" />
       <workItem from="1775720893986" duration="5856000" />
-      <workItem from="1776148118378" duration="1670000" />
-    </task>
-    <task id="LOCAL-00022" summary="si">
-      <option name="closed" value="true" />
-      <created>1761667127464</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1761667127464</updated>
+      <workItem from="1776148118378" duration="2396000" />
+      <workItem from="1776235715039" duration="40000" />
+      <workItem from="1776324691689" duration="6354000" />
     </task>
     <task id="LOCAL-00023" summary="si">
       <option name="closed" value="true" />
@@ -534,7 +532,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775728740109</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io">
+      <option name="closed" value="true" />
+      <created>1776149907712</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1776149907712</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

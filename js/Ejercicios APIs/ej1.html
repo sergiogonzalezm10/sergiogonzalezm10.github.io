@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ej1.html</title>
+</head>
+<body>
+
+<h1>Ejercicio 1: Consulta de Usuarios</h1>
+
+<button type="button" onclick="ejecutarProceso()">Pulsa y observa la consola</button>
+
+<div id="json-texto" style="margin-top: 15px;"></div>
+<div id="recuperado-texto"></div>
+
+<table border="1" id="tabla-datos" style="margin-top: 10px;">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Edad</th>
+        <th>Ciudad</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr id="fila-datos"></tr>
+    </tbody>
+</table>
+
+<script>
+    function convertirAJSON(objeto) {
+        const resultado = JSON.stringify(objeto);
+        console.log("Serializado:", resultado);
+        return resultado;
+    }
+
+    function convertirAObjeto(jsonStr) {
+        const resultado = JSON.parse(jsonStr);
+        console.log("Deserializado:", resultado);
+        return resultado;
+    }
+
+    function ejecutarProceso() {
+
+        const persona = {
+            nombre: "Alberto",
+            apellidos: "Ramos",
+            edad: 26,
+            ciudad: "Granada"
+        };
+
+        const jsonSerializado = convertirAJSON(persona);
+        document.getElementById('json-texto').innerText = jsonSerializado;
+
+        const objetoRecuperado = convertirAObjeto(jsonSerializado);
+
+        document.getElementById('recuperado-texto').innerText =
+            "Recuperado: nombre:" + objetoRecuperado.nombre +
+            ", apellidos:" + objetoRecuperado.apellidos +
+            ", edad:" + objetoRecuperado.edad +
+            ", ciudad:" + objetoRecuperado.ciudad;
+
+        document.getElementById('fila-datos').innerHTML = `
+            <td>${objetoRecuperado.nombre}</td>
+            <td>${objetoRecuperado.apellidos}</td>
+            <td>${objetoRecuperado.edad}</td>
+            <td>${objetoRecuperado.ciudad}</td>
+        `;
+    }
+</script>
+
+</body>
+</html>

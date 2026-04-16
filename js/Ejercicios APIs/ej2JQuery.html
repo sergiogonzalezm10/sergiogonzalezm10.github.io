@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Consulta Usuarios con JQuery</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+
+<h1>Consulta de Usuarios con JQuery</h1>
+
+<form id="formulario">
+    <input type="text" id="nombre" placeholder="Nombre" required>
+    <input type="text" id="apellidos" placeholder="Apellidos" required>
+    <input type="number" id="edad" placeholder="Edad" required>
+    <input type="text" id="ciudad" placeholder="Ciudad" required>
+    <button type="button" id="btn-ejecutar">Pulsa y observa la consola</button>
+</form>
+
+<div id="json-texto" style="margin-top: 15px;"></div>
+<div id="recuperado-texto"></div>
+
+<table border="1" id="tabla-datos" style="margin-top: 10px;">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Edad</th>
+        <th>Ciudad</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr id="fila-datos"></tr>
+    </tbody>
+</table>
+
+<script>
+    function convertirAJSON(objeto) {
+        const resultado = JSON.stringify(objeto);
+        console.log("Serializado:", resultado);
+        return resultado;
+    }
+
+    function convertirAObjeto(jsonStr) {
+        const resultado = JSON.parse(jsonStr);
+        console.log("Deserializado:", resultado);
+        return resultado;
+    }
+
+    $(document).ready(function () {
+
+        $('#btn-ejecutar').on('click', function () {
+
+            // Recoger datos del formulario en un objeto
+            const persona = {
+                nombre: $('#nombre').val(),
+                apellidos: $('#apellidos').val(),
+                edad: $('#edad').val(),
+                ciudad: $('#ciudad').val()
+            };
+
+            // 1. Serializar
+            const jsonSerializado = convertirAJSON(persona);
+            $('#json-texto').text(jsonSerializado);
+
+            // 2. Deserializar
+            const objetoRecuperado = convertirAObjeto(jsonSerializado);
+
+            // 3. Mostrar texto y tabla
+            $('#recuperado-texto').text(
+                "Recuperado: nombre:" + objetoRecuperado.nombre +
+                ", apellidos:" + objetoRecuperado.apellidos +
+                ", edad:" + objetoRecuperado.edad +
+                ", ciudad:" + objetoRecuperado.ciudad
+            );
+
+            $('#fila-datos').html(`
+                <td>${objetoRecuperado.nombre}</td>
+                <td>${objetoRecuperado.apellidos}</td>
+                <td>${objetoRecuperado.edad}</td>
+                <td>${objetoRecuperado.ciudad}</td>
+            `);
+        });
+
+    });
+</script>
+
+</body>
+</html>

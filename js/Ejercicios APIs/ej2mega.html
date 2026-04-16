@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ej2mega.html</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+
+<h1>Ejemplo 2: Consulta de Usuarios - MEGARETO</h1>
+
+<form id="formulario">
+    <input type="text" id="nombre" placeholder="Nombre">
+    <input type="text" id="apellidos" placeholder="Apellidos">
+    <input type="number" id="edad" placeholder="Edad">
+    <input type="text" id="ciudad" placeholder="Ciudad">
+    <button type="button" id="btn-ejecutar">Pulsa y observa la consola</button>
+</form>
+
+<div id="json-texto" style="margin-top: 15px;"></div>
+<div id="recuperado-texto"></div>
+
+<table border="1" style="margin-top: 10px;">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Edad</th>
+        <th>Ciudad</th>
+    </tr>
+    </thead>
+    <tbody id="cuerpo-tabla"></tbody>
+</table>
+
+<div id="estadisticas" style="margin-top: 15px;"></div>
+
+<script>
+
+    // Array donde guardamos todas las personas
+    let listaPersonas = [];
+
+    // Convierte un objeto a texto JSON
+    function convertirAJSON(objeto) {
+        let resultado = JSON.stringify(objeto);
+        console.log("Serializado:", resultado);
+        return resultado;
+    }
+
+    // Convierte texto JSON a objeto
+    function convertirAObjeto(jsonStr) {
+        let resultado = JSON.parse(jsonStr);
+        console.log("Deserializado:", resultado);
+        return resultado;
+    }
+
+    // Añade una persona al array usando push
+    function añadirPersona(persona) {
+        listaPersonas.push(persona);
+    }
+
+    // Crea un TR a partir de una persona y lo devuelve
+    function generarTR(persona) {
+        let fila = $('<tr style="cursor:pointer;" title="Clic para eliminar"></tr>');
+        fila.attr('id', 'fila-' + persona.id);
+
+        fila.append('<td>' + persona.nombre + '</td>');
+        fila.append('<td>' + persona.apellidos + '</td>');
+        fila.append('<td>' + persona.edad + '</td>');
+        fila.append('<td>' + persona.ciudad + '</td>');
+
+        // Al hacer clic en la fila, la eliminamos
+        fila.on('click', function() {
+            // Buscamos la persona en el array por su id
+            let indice = -1;
+            for (let i = 0; i < listaPersonas.length; i++) {
+                if (listaPersonas[i].id === persona.id) {
+                    indice = i;
+                }
+            }
+            // La eliminamos del array con splice
+            if (indice !== -1) {
+                listaPersonas.splice(indice, 1);
+            }
+            // La eliminamos de la tabla
+            $('#fila-' + persona.id).remove();
+            // Recalculamos estadísticas
+            calcularEstadisticas();
+        });
+
+        return fila;
+    }
+
+    // Vacía la tabla y la vuelve a construir desde el array
+    function generaTabla(jsonLista) {
+        // Deserializamos el JSON para obtener la lista
+        let listaRecuperada = convertirAObjeto(jsonLista);
+
+        // Vaciamos el tbody
+        $('#cuerpo-tabla').empty();
+
+        // Por cada persona del array generamos un TR y lo añadimos
+        for (let i = 0; i < listaRecuperada.length; i++) {
+            let fila = generarTR(listaRecuperada[i]);
+            $('#cuerpo-tabla').append(fila);
+        }
+
+        calcularEstadisticas();
+    }
+
+    // Calcula y muestra suma, media, máximo y mínimo de edades
+    function calcularEstadisticas() {
+        let edades = [];
+
+        $('#cuerpo-tabla tr').each(function() {
+            let edad = parseInt($(this).find('td').eq(2).text());
+            if (!isNaN(edad)) {
+                edades.push(edad);
+            }
+        });
+
+        if (edades.length === 0) {
+            $('#estadisticas').text('');
+            return;
+        }
+
+        let suma = 0;
+        for (let i = 0; i < edades.length; i++) {
+            suma += edades[i];
+        }
+        let media = (suma / edades.length).toFixed(2);
+        let maximo = Math.max.apply(null, edades);
+        let minimo = Math.min.apply(null, edades);
+
+        console.log("Suma:", suma, "Media:", media, "Máximo:", maximo, "Mínimo:", minimo);
+
+        $('#estadisticas').html(
+            '<strong>Suma:</strong> ' + suma + ' &nbsp;&nbsp; ' +
+            '<strong>Media:</strong> ' + media + ' &nbsp;&nbsp; ' +
+            '<strong>Máximo:</strong> ' + maximo + ' &nbsp;&nbsp; ' +
+            '<strong>Mínimo:</strong> ' + minimo
+        );
+    }
+
+    $(document).ready(function() {
+
+        $('#btn-ejecutar').on('click', function() {
+
+            // Comprobamos que todos los campos estén rellenos
+            if ($('#nombre').val().trim() === '') { alert('El campo nombre es obligatorio'); return; }
+            if ($('#apellidos').val().trim() === '') { alert('El campo apellidos es obligatorio'); return; }
+            if ($('#edad').val().trim() === '') { alert('El campo edad es obligatorio'); return; }
+            if ($('#ciudad').val().trim() === '') { alert('El campo ciudad es obligatorio'); return; }
+
+            // Creamos el objeto persona con un id único
+            let persona = {
+                id: Date.now(),
+                nombre: $('#nombre').val().trim(),
+                apellidos: $('#apellidos').val().trim(),
+                edad: $('#edad').val().trim(),
+                ciudad: $('#ciudad').val().trim()
+            };
+
+            // Añadimos la persona al array
+            añadirPersona(persona);
+
+            // Serializamos el array completo y lo mostramos
+            let jsonSerializado = convertirAJSON(listaPersonas);
+            $('#json-texto').text(jsonSerializado);
+
+            // Regeneramos la tabla a partir del JSON
+            generaTabla(jsonSerializado);
+
+            // Mostramos el último objeto recuperado
+            $('#recuperado-texto').text(
+                'Último añadido -> nombre: ' + persona.nombre +
+                ', apellidos: ' + persona.apellidos +
+                ', edad: ' + persona.edad +
+                ', ciudad: ' + persona.ciudad
+            );
+
+            // Limpiamos el formulario
+            $('#formulario input').val('');
+        });
+
+    });
+
+</script>
+
+</body>
+</html>
