@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 2 - RETO</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+
+<h1>Ejemplo 2: Consulta de Usuarios - RETO</h1>
+
+<form id="formulario">
+    <input type="text" id="nombre" placeholder="Nombre">
+    <input type="text" id="apellidos" placeholder="Apellidos">
+    <input type="number" id="edad" placeholder="Edad">
+    <input type="text" id="ciudad" placeholder="Ciudad">
+    <button type="button" id="btn-ejecutar">Pulsa y observa la consola</button>
+</form>
+
+<div id="json-texto" style="margin-top: 15px;"></div>
+<div id="recuperado-texto"></div>
+
+<table border="1" id="tabla-datos" style="margin-top: 10px;">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Edad</th>
+        <th>Ciudad</th>
+    </tr>
+    </thead>
+    <tbody id="cuerpo-tabla"></tbody>
+</table>
+
+<div id="estadisticas" style="margin-top: 15px;"></div>
+
+<script>
+    function convertirAJSON(objeto) {
+        const resultado = JSON.stringify(objeto);
+        console.log("Serializado:", resultado);
+        return resultado;
+    }
+
+    function convertirAObjeto(jsonStr) {
+        const resultado = JSON.parse(jsonStr);
+        console.log("Deserializado:", resultado);
+        return resultado;
+    }
+
+    function calcularEstadisticas() {
+        const edades = [];
+
+        $('#cuerpo-tabla tr').each(function () {
+            const edad = parseInt($(this).find('td').eq(2).text());
+            if (!isNaN(edad)) edades.push(edad);
+        });
+
+        if (edades.length === 0) {
+            $('#estadisticas').text('');
+            return;
+        }
+
+        const suma = edades.reduce((a, b) => a + b, 0);
+        const media = (suma / edades.length).toFixed(2);
+        const maximo = Math.max(...edades);
+        const minimo = Math.min(...edades);
+
+        console.log("Suma:", suma, "| Media:", media, "| Máximo:", maximo, "| Mínimo:", minimo);
+
+        $('#estadisticas').html(`
+            <strong>Suma:</strong> ${suma} &nbsp;&nbsp;
+            <strong>Media:</strong> ${media} &nbsp;&nbsp;
+            <strong>Máximo:</strong> ${maximo} &nbsp;&nbsp;
+            <strong>Mínimo:</strong> ${minimo}
+        `);
+    }
+
+    $(document).ready(function () {
+
+        $('#btn-ejecutar').on('click', function () {
+
+            // Validación de campos obligatorios
+            const campos = ['nombre', 'apellidos', 'edad', 'ciudad'];
+            for (const campo of campos) {
+                if ($('#' + campo).val().trim() === '') {
+                    alert('El campo ' + campo + ' es obligatorio');
+                    return;
+                }
+            }
+
+            const persona = {
+                nombre: $('#nombre').val().trim(),
+                apellidos: $('#apellidos').val().trim(),
+                edad: $('#edad').val().trim(),
+                ciudad: $('#ciudad').val().trim()
+            };
+
+            // 1. Serializar
+            const jsonSerializado = convertirAJSON(persona);
+            $('#json-texto').text(jsonSerializado);
+
+            // 2. Deserializar
+            const objetoRecuperado = convertirAObjeto(jsonSerializado);
+
+            // 3. Mostrar texto
+            $('#recuperado-texto').text(
+                "Recuperado: nombre:" + objetoRecuperado.nombre +
+                ", apellidos:" + objetoRecuperado.apellidos +
+                ", edad:" + objetoRecuperado.edad +
+                ", ciudad:" + objetoRecuperado.ciudad
+            );
+
+            // 4. Añadir fila a la tabla con id único y onclick para eliminar
+            const id = 'fila-' + Date.now();
+            const nuevaFila = $(`
+                <tr id="${id}" style="cursor:pointer;" title="Clic para eliminar">
+                    <td>${objetoRecuperado.nombre}</td>
+                    <td>${objetoRecuperado.apellidos}</td>
+                    <td>${objetoRecuperado.edad}</td>
+                    <td>${objetoRecuperado.ciudad}</td>
+                </tr>
+            `);
+
+            nuevaFila.on('click', function () {
+                $('#' + id).remove();
+                calcularEstadisticas();
+            });
+
+            $('#cuerpo-tabla').append(nuevaFila);
+
+            // 5. Calcular estadísticas
+            calcularEstadisticas();
+
+            // Limpiar formulario
+            $('#formulario input').val('');
+        });
+
+    });
+</script>
+
+</body>
+</html>

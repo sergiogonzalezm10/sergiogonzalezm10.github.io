@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ej1reto.html</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+
+<h1>Ejercicio 1 Reto: Consulta de Usuarios - RETO</h1>
+
+<table border="1" id="tabla-datos" style="margin-top: 10px;">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Edad</th>
+        <th>Ciudad</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td id="td-nombre"></td>
+        <td id="td-apellidos"></td>
+        <td id="td-edad"></td>
+        <td id="td-ciudad"></td>
+    </tr>
+    </tbody>
+</table>
+
+<script>
+    function convertirAJSON(objeto) {
+        const resultado = JSON.stringify(objeto);
+        console.log("Serializado:", resultado);
+        return resultado;
+    }
+
+    function convertirAObjeto(jsonStr) {
+        const resultado = JSON.parse(jsonStr);
+        console.log("Deserializado:", resultado);
+        return resultado;
+    }
+
+    $(document).ready(function () {
+
+        const persona = {
+            nombre: "Alberto",
+            apellidos: "Ramos",
+            edad: 26,
+            ciudad: "Granada"
+        };
+
+        const jsonSerializado = convertirAJSON(persona);
+
+
+        const objetoRecuperado = convertirAObjeto(jsonSerializado);
+
+        $('#td-nombre').text(objetoRecuperado.nombre);
+        $('#td-apellidos').text(objetoRecuperado.apellidos);
+        $('#td-edad').text(objetoRecuperado.edad);
+        $('#td-ciudad').text(objetoRecuperado.ciudad);
+
+    });
+</script>
+
+</body>
+</html>
