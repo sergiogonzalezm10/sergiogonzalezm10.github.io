@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ej3.html</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        .contenedor-hobbies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin: 10px 0;
+        }
+        .item-hobby {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Ejercicio 3: Listas (Hobbies)</h1>
+
+<form id="formulario">
+    <input type="text" id="nombre" placeholder="Nombre">
+    <input type="text" id="apellidos" placeholder="Apellidos">
+    <input type="number" id="edad" placeholder="Edad">
+    <input type="text" id="ciudad" placeholder="Ciudad">
+
+    <fieldset>
+        <legend>Hobbies:</legend>
+        <div class="contenedor-hobbies">
+            <div class="item-hobby"><input type="checkbox" name="hobbies[]" value="Deporte" id="h1"><label for="h1">Deporte</label></div>
+            <div class="item-hobby"><input type="checkbox" name="hobbies[]" value="Lectura" id="h2"><label for="h2">Lectura</label></div>
+            <div class="item-hobby"><input type="checkbox" name="hobbies[]" value="Música" id="h3"><label for="h3">Música</label></div>
+            <div class="item-hobby"><input type="checkbox" name="hobbies[]" value="Juegos" id="h4"><label for="h4">Juegos</label></div>
+            <div class="item-hobby"><input type="checkbox" name="hobbies[]" value="Cine" id="h5"><label for="h5">Cine</label></div>
+            <div class="item-hobby"><input type="checkbox" name="hobbies[]" value="Teatro" id="h6"><label for="h6">Teatro</label></div>
+            <div class="item-hobby"><input type="checkbox" name="hobbies[]" value="Coleccionismo" id="h7"><label for="h7">Coleccionismo</label></div>
+            <div class="item-hobby"><input type="checkbox" name="hobbies[]" value="Bricolaje" id="h8"><label for="h8">Bricolaje</label></div>
+            <div class="item-hobby"><input type="checkbox" name="hobbies[]" value="Cosplay" id="h9"><label for="h9">Cosplay</label></div>
+        </div>
+    </fieldset>
+
+    <button type="button" id="btn-ejecutar">Pulsa para insertar</button>
+</form>
+
+<table border="1" style="margin-top: 10px; width: 100%;">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Edad</th>
+        <th>Ciudad</th>
+        <th>Hobbies</th> </tr>
+    </thead>
+    <tbody id="cuerpo-tabla"></tbody>
+</table>
+
+<div id="estadisticas" style="margin-top: 15px;"></div>
+
+<script>
+    let listaPersonas = [];
+
+    function generarTR(persona) {
+        let fila = $('<tr style="cursor:pointer;" title="Clic para eliminar"></tr>');
+        fila.attr('id', 'fila-' + persona.id);
+
+        fila.append('<td>' + persona.nombre + '</td>');
+        fila.append('<td>' + persona.apellidos + '</td>');
+        fila.append('<td>' + persona.edad + '</td>');
+        fila.append('<td>' + persona.ciudad + '</td>');
+        // Unimos el array de hobbies con comas para mostrarlo
+        fila.append('<td>' + persona.hobbies.join(', ') + '</td>');
+
+        fila.on('click', function() {
+            listaPersonas = listaPersonas.filter(p => p.id !== persona.id);
+            $(this).remove();
+            calcularEstadisticas();
+        });
+
+        return fila;
+    }
+
+    function generaTabla() {
+        $('#cuerpo-tabla').empty();
+        for (let i = 0; i < listaPersonas.length; i++) {
+            $('#cuerpo-tabla').append(generarTR(listaPersonas[i]));
+        }
+        calcularEstadisticas();
+    }
+
+    function calcularEstadisticas() {
+        let edades = listaPersonas.map(p => parseInt(p.edad)).filter(e => !isNaN(e));
+        if (edades.length === 0) { $('#estadisticas').text(''); return; }
+
+        let suma = edades.reduce((a, b) => a + b, 0);
+        let media = (suma / edades.length).toFixed(2);
+
+        $('#estadisticas').html(`<strong>Media de edad:</strong> ${media}`);
+    }
+
+    $(document).ready(function() {
+        $('#btn-ejecutar').on('click', function() {
+            // Validación simple
+            if ($('#nombre').val() === '') return alert('Falta nombre');
+
+            //Lógica de la imagen para leer checkboxes
+            let hobbiesSeleccionados = $('input[name="hobbies[]"]')
+                .filter(':checked')
+                .map(function() {
+                    return $(this).val();
+                }).get();
+
+            let persona = {
+                id: Date.now(),
+                nombre: $('#nombre').val(),
+                apellidos: $('#apellidos').val(),
+                edad: $('#edad').val(),
+                ciudad: $('#ciudad').val(),
+                hobbies: hobbiesSeleccionados // Guardamos el array
+            };
+
+            listaPersonas.push(persona);
+            generaTabla();
+
+            // Limpiar formulario
+            $('#formulario')[0].reset();
+        });
+    });
+</script>
+
+</body>
+</html>

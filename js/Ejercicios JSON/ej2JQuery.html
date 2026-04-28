@@ -2,18 +2,19 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ejercicio 1</title>
+    <title>Consulta Usuarios con JQuery</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
 
-<h1>Ejemplo 1: Consulta de Usuarios</h1>
+<h1>Ejercicio 2: Insertar datos dinámicos con JQuery</h1>
 
 <form id="formulario">
     <input type="text" id="nombre" placeholder="Nombre" required>
     <input type="text" id="apellidos" placeholder="Apellidos" required>
     <input type="number" id="edad" placeholder="Edad" required>
     <input type="text" id="ciudad" placeholder="Ciudad" required>
-    <button type="button" onclick="ejecutarProceso()">Pulsa y observa la consola</button>
+    <button type="button" id="btn-ejecutar">Pulsa y observa la consola</button>
 </form>
 
 <div id="json-texto" style="margin-top: 15px;"></div>
@@ -34,7 +35,6 @@
 </table>
 
 <script>
-    // Funciones de conversión
     function convertirAJSON(objeto) {
         const resultado = JSON.stringify(objeto);
         console.log("Serializado:", resultado);
@@ -47,36 +47,42 @@
         return resultado;
     }
 
-    function ejecutarProceso() {
-        // Recoger datos del formulario en un objeto
-        const persona = {
-            nombre: document.getElementById('nombre').value,
-            apellidos: document.getElementById('apellidos').value,
-            edad: document.getElementById('edad').value,
-            ciudad: document.getElementById('ciudad').value
-        };
+    $(document).ready(function () {
 
-        // 1. Serializar
-        const jsonSerializado = convertirAJSON(persona);
-        document.getElementById('json-texto').innerText = jsonSerializado;
+        $('#btn-ejecutar').on('click', function () {
 
-        // 2. Deserializar
-        const objetoRecuperado = convertirAObjeto(jsonSerializado);
+            // Recoger datos del formulario en un objeto
+            const persona = {
+                nombre: $('#nombre').val(),
+                apellidos: $('#apellidos').val(),
+                edad: $('#edad').val(),
+                ciudad: $('#ciudad').val()
+            };
 
-        // 3. Mostrar texto y tabla
-        document.getElementById('recuperado-texto').innerText =
-            "Recuperado: nombre:" + objetoRecuperado.nombre +
-            ", apellidos:" + objetoRecuperado.apellidos +
-            ", edad:" + objetoRecuperado.edad +
-            ", ciudad:" + objetoRecuperado.ciudad;
+            // 1. Serializar
+            const jsonSerializado = convertirAJSON(persona);
+            $('#json-texto').text(jsonSerializado);
 
-        document.getElementById('fila-datos').innerHTML = `
+            // 2. Deserializar
+            const objetoRecuperado = convertirAObjeto(jsonSerializado);
+
+            // 3. Mostrar texto y tabla
+            $('#recuperado-texto').text(
+                "Recuperado: nombre:" + objetoRecuperado.nombre +
+                ", apellidos:" + objetoRecuperado.apellidos +
+                ", edad:" + objetoRecuperado.edad +
+                ", ciudad:" + objetoRecuperado.ciudad
+            );
+
+            $('#fila-datos').html(`
                 <td>${objetoRecuperado.nombre}</td>
                 <td>${objetoRecuperado.apellidos}</td>
                 <td>${objetoRecuperado.edad}</td>
                 <td>${objetoRecuperado.ciudad}</td>
-            `;
-    }
+            `);
+        });
+
+    });
 </script>
 
 </body>

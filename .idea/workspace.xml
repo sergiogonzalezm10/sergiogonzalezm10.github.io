@@ -4,15 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21538386-c4a9-4507-9ed9-522d34cc05eb" name="Changes" comment="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io">
-      <change afterPath="$PROJECT_DIR$/js/Ejercicios APIs/ej1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/Ejercicios APIs/ej1reto.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/Ejercicios APIs/ej2JQuery.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/Ejercicios APIs/ej2mega.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/Ejercicios APIs/ej2reto.html" afterDir="false" />
+    <list default="true" id="21538386-c4a9-4507-9ed9-522d34cc05eb" name="Changes" comment="Merge remote-tracking branch 'origin/main'">
+      <change afterPath="$PROJECT_DIR$/js/Ejercicios APIS/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/Ejercicios JSON/ej3.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/Ejercicios JSON/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/Ejercicios APIs/ConsultaUsuarios.html" beforeDir="false" afterPath="$PROJECT_DIR$/js/Ejercicios APIs/ej2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/Ejercicios APIs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/js/Ejercicios APIs/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Ejercicios APIs/Ejercicio1.html" beforeDir="false" afterPath="$PROJECT_DIR$/js/Ejercicios APIS/EjercicioPerros.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Ejercicios APIs/ej1.html" beforeDir="false" afterPath="$PROJECT_DIR$/js/Ejercicios JSON/ej1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Ejercicios APIs/ej1reto.html" beforeDir="false" afterPath="$PROJECT_DIR$/js/Ejercicios JSON/ej1reto.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Ejercicios APIs/ej2.html" beforeDir="false" afterPath="$PROJECT_DIR$/js/Ejercicios JSON/ej2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Ejercicios APIs/ej2JQuery.html" beforeDir="false" afterPath="$PROJECT_DIR$/js/Ejercicios JSON/ej2JQuery.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Ejercicios APIs/ej2mega.html" beforeDir="false" afterPath="$PROJECT_DIR$/js/Ejercicios JSON/ej2mega.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Ejercicios APIs/ej2reto.html" beforeDir="false" afterPath="$PROJECT_DIR$/js/Ejercicios JSON/ej2reto.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Ejercicios APIs/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/ejemplo.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,47 +69,51 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;JavaScript Debug.CajaSimple.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.CodeFest.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.CodeFestindex.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.Ejercicio1.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.Ejercicio2.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.Ejercicio3.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.Flex.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.Index.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.Iniciacion.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.Maquetación de una Receta Responsiva.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.Prueba.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.about.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.cartel.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.ejercicio2.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.ejercicio3.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.ejercicio4.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.entradas.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.index.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.localizacion.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.messi.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.prueba.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.pruebaformulario.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.tablaprueba.html.executor&quot;: &quot;Debug&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "JavaScript Debug.CajaSimple.html.executor": "Debug",
+    "JavaScript Debug.CodeFest.html.executor": "Debug",
+    "JavaScript Debug.CodeFestindex.html.executor": "Debug",
+    "JavaScript Debug.Ejercicio1.html.executor": "Debug",
+    "JavaScript Debug.Ejercicio2.html.executor": "Debug",
+    "JavaScript Debug.Ejercicio3.html.executor": "Debug",
+    "JavaScript Debug.Flex.html.executor": "Debug",
+    "JavaScript Debug.Index.html.executor": "Debug",
+    "JavaScript Debug.Iniciacion.html.executor": "Debug",
+    "JavaScript Debug.Maquetación de una Receta Responsiva.html.executor": "Debug",
+    "JavaScript Debug.Prueba.html.executor": "Debug",
+    "JavaScript Debug.about.html.executor": "Debug",
+    "JavaScript Debug.cartel.html.executor": "Debug",
+    "JavaScript Debug.ejercicio2.html.executor": "Debug",
+    "JavaScript Debug.ejercicio3.html.executor": "Debug",
+    "JavaScript Debug.ejercicio4.html.executor": "Debug",
+    "JavaScript Debug.entradas.html.executor": "Debug",
+    "JavaScript Debug.index.html.executor": "Debug",
+    "JavaScript Debug.localizacion.html.executor": "Debug",
+    "JavaScript Debug.messi.html.executor": "Debug",
+    "JavaScript Debug.prueba.html.executor": "Debug",
+    "JavaScript Debug.pruebaformulario.html.executor": "Debug",
+    "JavaScript Debug.tablaprueba.html.executor": "Debug",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/sergio.gonzalezm/Documents/GitHub/sergiogonzalezm10.github.io/js/EjerciciosJSON",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "advanced.settings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\sergio.gonzalezm\Documents\GitHub\sergiogonzalezm10.github.io\js\EjerciciosJSON" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\sergio.gonzalezm\Documents\GitHub\sergiogonzalezm10.github.io\ejercicioscss\img" />
       <recent name="C:\Users\sergio.gonzalezm\Documents\GitHub\sergiogonzalezm10.github.io\CodeFest\img" />
@@ -146,39 +156,8 @@
       <workItem from="1775720893986" duration="5856000" />
       <workItem from="1776148118378" duration="2396000" />
       <workItem from="1776235715039" duration="40000" />
-      <workItem from="1776324691689" duration="6354000" />
-    </task>
-    <task id="LOCAL-00023" summary="si">
-      <option name="closed" value="true" />
-      <created>1761667271972</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1761667271972</updated>
-    </task>
-    <task id="LOCAL-00024" summary="si">
-      <option name="closed" value="true" />
-      <created>1761669763268</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1761669763268</updated>
-    </task>
-    <task id="LOCAL-00025" summary="si">
-      <option name="closed" value="true" />
-      <created>1761669833367</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1761669833367</updated>
-    </task>
-    <task id="LOCAL-00026" summary="si">
-      <option name="closed" value="true" />
-      <created>1761670132427</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1761670132427</updated>
+      <workItem from="1776324691689" duration="6387000" />
+      <workItem from="1777357181058" duration="3743000" />
     </task>
     <task id="LOCAL-00027" summary="si">
       <option name="closed" value="true" />
@@ -540,7 +519,39 @@
       <option name="project" value="LOCAL" />
       <updated>1776149907712</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io">
+      <option name="closed" value="true" />
+      <created>1776333100077</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1776333100080</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io">
+      <option name="closed" value="true" />
+      <created>1776333105699</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1776333105699</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Merge remote-tracking branch 'origin/main'">
+      <option name="closed" value="true" />
+      <created>1776333114652</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1776333114652</updated>
+    </task>
+    <task id="LOCAL-00075" summary="Merge remote-tracking branch 'origin/main'">
+      <option name="closed" value="true" />
+      <created>1776333122696</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1776333122696</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -551,7 +562,8 @@
     <MESSAGE value="si" />
     <MESSAGE value="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
     <MESSAGE value="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'main' of https://github.com/sergiogonzalezm10/sergiogonzalezm10.github.io" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/main'" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/main'" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
