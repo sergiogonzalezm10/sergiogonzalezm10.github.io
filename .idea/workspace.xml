@@ -5,20 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21538386-c4a9-4507-9ed9-522d34cc05eb" name="Changes" comment="Merge remote-tracking branch 'origin/main'">
-      <change afterPath="$PROJECT_DIR$/js/Ejercicios APIS/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/Ejercicios JSON/ej3.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/Ejercicios JSON/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/Ejercicios JSON/Ejercicio4.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/Ejercicios JSON/ejercicio3reto.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/Ejercicios APIs/Ejercicio1.html" beforeDir="false" afterPath="$PROJECT_DIR$/js/Ejercicios APIS/EjercicioPerros.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/Ejercicios APIs/ej1.html" beforeDir="false" afterPath="$PROJECT_DIR$/js/Ejercicios JSON/ej1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/Ejercicios APIs/ej1reto.html" beforeDir="false" afterPath="$PROJECT_DIR$/js/Ejercicios JSON/ej1reto.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/Ejercicios APIs/ej2.html" beforeDir="false" afterPath="$PROJECT_DIR$/js/Ejercicios JSON/ej2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/Ejercicios APIs/ej2JQuery.html" beforeDir="false" afterPath="$PROJECT_DIR$/js/Ejercicios JSON/ej2JQuery.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/Ejercicios APIs/ej2mega.html" beforeDir="false" afterPath="$PROJECT_DIR$/js/Ejercicios JSON/ej2mega.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/Ejercicios APIs/ej2reto.html" beforeDir="false" afterPath="$PROJECT_DIR$/js/Ejercicios JSON/ej2reto.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/Ejercicios APIs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/ejemplo.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,47 +58,47 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "JavaScript Debug.CajaSimple.html.executor": "Debug",
-    "JavaScript Debug.CodeFest.html.executor": "Debug",
-    "JavaScript Debug.CodeFestindex.html.executor": "Debug",
-    "JavaScript Debug.Ejercicio1.html.executor": "Debug",
-    "JavaScript Debug.Ejercicio2.html.executor": "Debug",
-    "JavaScript Debug.Ejercicio3.html.executor": "Debug",
-    "JavaScript Debug.Flex.html.executor": "Debug",
-    "JavaScript Debug.Index.html.executor": "Debug",
-    "JavaScript Debug.Iniciacion.html.executor": "Debug",
-    "JavaScript Debug.Maquetación de una Receta Responsiva.html.executor": "Debug",
-    "JavaScript Debug.Prueba.html.executor": "Debug",
-    "JavaScript Debug.about.html.executor": "Debug",
-    "JavaScript Debug.cartel.html.executor": "Debug",
-    "JavaScript Debug.ejercicio2.html.executor": "Debug",
-    "JavaScript Debug.ejercicio3.html.executor": "Debug",
-    "JavaScript Debug.ejercicio4.html.executor": "Debug",
-    "JavaScript Debug.entradas.html.executor": "Debug",
-    "JavaScript Debug.index.html.executor": "Debug",
-    "JavaScript Debug.localizacion.html.executor": "Debug",
-    "JavaScript Debug.messi.html.executor": "Debug",
-    "JavaScript Debug.prueba.html.executor": "Debug",
-    "JavaScript Debug.pruebaformulario.html.executor": "Debug",
-    "JavaScript Debug.tablaprueba.html.executor": "Debug",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/sergio.gonzalezm/Documents/GitHub/sergiogonzalezm10.github.io/js/EjerciciosJSON",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "advanced.settings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;JavaScript Debug.CajaSimple.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.CodeFest.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.CodeFestindex.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.Ejercicio1.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.Ejercicio2.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.Ejercicio3.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.Flex.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.Index.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.Iniciacion.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.Maquetación de una Receta Responsiva.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.Prueba.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.about.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.cartel.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.ejercicio2.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.ejercicio3.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.ejercicio4.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.entradas.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.index.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.localizacion.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.messi.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.prueba.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.pruebaformulario.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.tablaprueba.html.executor&quot;: &quot;Debug&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/sergio.gonzalezm/Documents/GitHub/sergiogonzalezm10.github.io/js/EjerciciosJSON&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\sergio.gonzalezm\Documents\GitHub\sergiogonzalezm10.github.io\js\EjerciciosJSON" />
@@ -157,15 +146,8 @@
       <workItem from="1776148118378" duration="2396000" />
       <workItem from="1776235715039" duration="40000" />
       <workItem from="1776324691689" duration="6387000" />
-      <workItem from="1777357181058" duration="3743000" />
-    </task>
-    <task id="LOCAL-00027" summary="si">
-      <option name="closed" value="true" />
-      <created>1761670867420</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1761670867420</updated>
+      <workItem from="1777357181058" duration="3783000" />
+      <workItem from="1777530186547" duration="7002000" />
     </task>
     <task id="LOCAL-00028" summary="si">
       <option name="closed" value="true" />
@@ -551,7 +533,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776333122696</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="Merge remote-tracking branch 'origin/main'">
+      <option name="closed" value="true" />
+      <created>1777360957422</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1777360957422</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
