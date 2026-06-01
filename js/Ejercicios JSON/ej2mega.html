@@ -2,25 +2,45 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>ej2mega.html</title>
+    <title>Ejercicio 2 MegaReto</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        form { background-color: #f9f9f9; padding: 15px; border: 1px solid #ccc; width: 320px; margin-bottom: 20px; }
+        form p { margin: 10px 0; }
+        table { border-collapse: collapse; margin-top: 15px; width: 500px; }
+        th, td { padding: 8px; text-align: left; }
+        tr.fila-usuario { cursor: pointer; }
+        tr.fila-usuario:hover { background-color: #ffcccc; }
+        #panel-estadisticas { background-color: #eef; padding: 10px; border: 1px solid #aad; width: 320px; margin-top: 15px; border-radius: 4px; }
+        #panel-estadisticas p { margin: 5px 0; font-weight: bold; }
+    </style>
 </head>
 <body>
 
-<h1>Ejercicio 2: Insertar datos dinámicos - MEGARETO</h1>
+<h1>Ejercicio 2 MegaReto: Persistencia en Array</h1>
 
-<form id="formulario">
-    <input type="text" id="nombre" placeholder="Nombre">
-    <input type="text" id="apellidos" placeholder="Apellidos">
-    <input type="number" id="edad" placeholder="Edad">
-    <input type="text" id="ciudad" placeholder="Ciudad">
-    <button type="button" id="btn-ejecutar">Pulsa y observa la consola</button>
+<form id="formulario-usuario">
+    <p>
+        <label for="txt-nombre">Nombre:</label><br>
+        <input type="text" id="txt-nombre">
+    </p>
+    <p>
+        <label for="txt-apellidos">Apellidos:</label><br>
+        <input type="text" id="txt-apellidos">
+    </p>
+    <p>
+        <label for="txt-edad">Edad:</label><br>
+        <input type="number" id="txt-edad">
+    </p>
+    <p>
+        <label for="txt-ciudad">Ciudad:</label><br>
+        <input type="text" id="txt-ciudad">
+    </p>
+    <button type="submit">Agregar Usuario</button>
 </form>
 
-<div id="json-texto" style="margin-top: 15px;"></div>
-<div id="recuperado-texto"></div>
-
-<table border="1" style="margin-top: 10px;">
+<table border="1" id="tabla-datos">
     <thead>
     <tr>
         <th>Nombre</th>
@@ -29,161 +49,138 @@
         <th>Ciudad</th>
     </tr>
     </thead>
-    <tbody id="cuerpo-tabla"></tbody>
+    <tbody id="cuerpo-tabla">
+    </tbody>
 </table>
 
-<div id="estadisticas" style="margin-top: 15px;"></div>
+<div id="panel-estadisticas">
+    <h3>Estadísticas de Edad</h3>
+    <p>Suma: <span id="est-suma">0</span></p>
+    <p>Media: <span id="est-media">0</span></p>
+    <p>Máximo: <span id="est-max">0</span></p>
+    <p>Mínimo: <span id="est-min">0</span></p>
+</div>
 
 <script>
+    // 1. Crea un array en JavaScript que guarde las filas. Inicialmente estará vacío.
+    let listaUsuarios = [];
 
-    // Array donde guardamos todas las personas
-    let listaPersonas = [];
+    // FUNCIÓN ANTERIOR MODIFICADA (generaTR): Ahora acepta el índice del array como parámetro identificador
+    function generaTR(indice, usuario) {
+        const $nuevaFila = $(`
+            <tr id="fila-${indice}" class="fila-usuario">
+                <td>${usuario.nombre}</td>
+                <td>${usuario.apellidos}</td>
+                <td>${usuario.edad}</td>
+                <td>${usuario.ciudad}</td>
+            </tr>
+        `);
 
-    // Convierte un objeto a texto JSON
-    function convertirAJSON(objeto) {
-        let resultado = JSON.stringify(objeto);
-        console.log("Serializado:", resultado);
-        return resultado;
+        // Al hacer click, enviamos el índice de la posición que ocupa en el array para poder aplicar splice
+        $nuevaFila.attr('onclick', `eliminarRegistro(${indice})`);
+
+        return $nuevaFila;
     }
 
-    // Convierte texto JSON a objeto
-    function convertirAObjeto(jsonStr) {
-        let resultado = JSON.parse(jsonStr);
-        console.log("Deserializado:", resultado);
-        return resultado;
-    }
+    // FUNCIÓN SOLICITADA: Procesa el origen de datos y reconstruye la tabla por completo
+    function generaTabla(listaDeDatos) {
+        // En un caso real con paso de JSON, se deserializaría de la siguiente forma:
+        // const datos = JSON.parse(listaDeDatos);
+        const datos = listaDeDatos;
 
-    // Añade una persona al array usando push
-    function añadirPersona(persona) {
-        listaPersonas.push(persona);
-    }
+        const $tbody = $('#cuerpo-tabla');
+        $tbody.empty(); // Se vacía y limpia por completo la tabla anterior en el DOM
 
-    // Crea un TR a partir de una persona y lo devuelve
-    function generarTR(persona) {
-        let fila = $('<tr style="cursor:pointer;" title="Clic para eliminar"></tr>');
-        fila.attr('id', 'fila-' + persona.id);
-
-        fila.append('<td>' + persona.nombre + '</td>');
-        fila.append('<td>' + persona.apellidos + '</td>');
-        fila.append('<td>' + persona.edad + '</td>');
-        fila.append('<td>' + persona.ciudad + '</td>');
-
-        // Al hacer clic en la fila, la eliminamos
-        fila.on('click', function() {
-            // Buscamos la persona en el array por su id
-            let indice = -1;
-            for (let i = 0; i < listaPersonas.length; i++) {
-                if (listaPersonas[i].id === persona.id) {
-                    indice = i;
-                }
-            }
-            // La eliminamos del array con splice
-            if (indice !== -1) {
-                listaPersonas.splice(indice, 1);
-            }
-            // La eliminamos de la tabla
-            $('#fila-' + persona.id).remove();
-            // Recalculamos estadísticas
-            calcularEstadisticas();
+        // Por cada elemento del objeto/array recuperado ejecutamos un bucle forEach
+        datos.forEach(function(usuario, indice) {
+            // Generamos el TR pasando el índice real y los datos del objeto actual
+            const $filaHtml = generaTR(indice, usuario);
+            $tbody.append($filaHtml);
         });
 
-        return fila;
+        // Aprovechamos la reconstrucción para actualizar las estadísticas de edad
+        actualizarEstadisticas(datos);
     }
 
-    // Vacía la tabla y la vuelve a construir desde el array
-    function generaTabla(jsonLista) {
-        // Deserializamos el JSON para obtener la lista
-        let listaRecuperada = convertirAObjeto(jsonLista);
+    // FUNCIÓN SOLICITADA: Añade mediante un push el objeto de datos del formulario al array
+    function agregarAlArray(nombre, apellidos, edad, ciudad) {
+        const nuevoUsuario = {
+            nombre: nombre,
+            apellidos: apellidos,
+            edad: parseInt(edad),
+            ciudad: ciudad
+        };
 
-        // Vaciamos el tbody
-        $('#cuerpo-tabla').empty();
+        listaUsuarios.push(nuevoUsuario);
 
-        // Por cada persona del array generamos un TR y lo añadimos
-        for (let i = 0; i < listaRecuperada.length; i++) {
-            let fila = generarTR(listaRecuperada[i]);
-            $('#cuerpo-tabla').append(fila);
-        }
+        // SERIALIZACIÓN OPCIONAL SOLICITADA: Demostración en consola del estado del array en formato JSON
+        const jsonSerializado = JSON.stringify(listaUsuarios);
+        console.log("JSON Serializado de la lista actual:", jsonSerializado);
 
-        calcularEstadisticas();
+        // Volvemos a pintar toda la tabla pasándole el array modificado
+        generaTabla(listaUsuarios);
     }
 
-    // Calcula y muestra suma, media, máximo y mínimo de edades
-    function calcularEstadisticas() {
-        let edades = [];
+    // FUNCIÓN RETO MODIFICADA: Elimina el registro del ARRAY usando splice e índice
+    function eliminarRegistro(indice) {
+        // Borrado lógico del elemento del objeto utilizando el índice correspondiente
+        listaUsuarios.splice(indice, 1);
 
-        $('#cuerpo-tabla tr').each(function() {
-            let edad = parseInt($(this).find('td').eq(2).text());
-            if (!isNaN(edad)) {
-                edades.push(edad);
-            }
-        });
+        console.log(`Registro eliminado en el índice [${indice}]. Estado actual del array:`, listaUsuarios);
 
-        if (edades.length === 0) {
-            $('#estadisticas').text('');
+        // Reconstruimos la tabla con el array modificado para actualizar los IDs de las filas restantes en el DOM
+        generaTabla(listaUsuarios);
+    }
+
+    // FUNCIÓN AUXILIAR: Calcula los datos matemáticos sobre las edades del array actual
+    function actualizarEstadisticas(usuarios) {
+        if (usuarios.length === 0) {
+            $('#est-suma').text(0);
+            $('#est-media').text(0);
+            $('#est-max').text(0);
+            $('#est-min').text(0);
             return;
         }
 
         let suma = 0;
-        for (let i = 0; i < edades.length; i++) {
-            suma += edades[i];
-        }
-        let media = (suma / edades.length).toFixed(2);
-        let maximo = Math.max.apply(null, edades);
-        let minimo = Math.min.apply(null, edades);
+        let edades = [];
 
-        console.log("Suma:", suma, "Media:", media, "Máximo:", maximo, "Mínimo:", minimo);
-
-        $('#estadisticas').html(
-            '<strong>Suma:</strong> ' + suma + ' &nbsp;&nbsp; ' +
-            '<strong>Media:</strong> ' + media + ' &nbsp;&nbsp; ' +
-            '<strong>Máximo:</strong> ' + maximo + ' &nbsp;&nbsp; ' +
-            '<strong>Mínimo:</strong> ' + minimo
-        );
-    }
-
-    $(document).ready(function() {
-
-        $('#btn-ejecutar').on('click', function() {
-
-            // Comprobamos que todos los campos estén rellenos
-            if ($('#nombre').val().trim() === '') { alert('El campo nombre es obligatorio'); return; }
-            if ($('#apellidos').val().trim() === '') { alert('El campo apellidos es obligatorio'); return; }
-            if ($('#edad').val().trim() === '') { alert('El campo edad es obligatorio'); return; }
-            if ($('#ciudad').val().trim() === '') { alert('El campo ciudad es obligatorio'); return; }
-
-            // Creamos el objeto persona con un id único
-            let persona = {
-                id: Date.now(),
-                nombre: $('#nombre').val().trim(),
-                apellidos: $('#apellidos').val().trim(),
-                edad: $('#edad').val().trim(),
-                ciudad: $('#ciudad').val().trim()
-            };
-
-            // Añadimos la persona al array
-            añadirPersona(persona);
-
-            // Serializamos el array completo y lo mostramos
-            let jsonSerializado = convertirAJSON(listaPersonas);
-            $('#json-texto').text(jsonSerializado);
-
-            // Regeneramos la tabla a partir del JSON
-            generaTabla(jsonSerializado);
-
-            // Mostramos el último objeto recuperado
-            $('#recuperado-texto').text(
-                'Último añadido -> nombre: ' + persona.nombre +
-                ', apellidos: ' + persona.apellidos +
-                ', edad: ' + persona.edad +
-                ', ciudad: ' + persona.ciudad
-            );
-
-            // Limpiamos el formulario
-            $('#formulario input').val('');
+        usuarios.forEach(function(u) {
+            suma += u.edad;
+            edades.push(u.edad);
         });
 
-    });
+        let media = suma / usuarios.length;
+        let maximo = Math.max(...edades);
+        let minimo = Math.min(...edades);
 
+        $('#est-suma').text(suma);
+        $('#est-media').text(media.toFixed(1));
+        $('#est-max').text(maximo);
+        $('#est-min').text(minimo);
+    }
+
+    // Controlador del evento de envío del formulario
+    $('#formulario-usuario').on('submit', function(e) {
+        e.preventDefault(); // Evitamos recargas de página incompletas
+
+        const nombre = $('#txt-nombre').val().trim();
+        const apellidos = $('#txt-apellidos').val().trim();
+        const edadTexto = $('#txt-edad').val().trim();
+        const ciudad = $('#txt-ciudad').val().trim();
+
+        // Validaciones obligatorias heredadas del ejercicio anterior
+        if (nombre === "") { alert("El campo Nombre es obligatorio."); return; }
+        if (apellidos === "") { alert("El campo Apellidos es obligatorio."); return; }
+        if (edadTexto === "") { alert("El campo Edad es obligatorio."); return; }
+        if (ciudad === "") { alert("El campo Ciudad es obligatorio."); return; }
+
+        // Invocamos la adición al array de persistencia
+        agregarAlArray(nombre, apellidos, edadTexto, ciudad);
+
+        // Reseteamos campos
+        this.reset();
+    });
 </script>
 
 </body>

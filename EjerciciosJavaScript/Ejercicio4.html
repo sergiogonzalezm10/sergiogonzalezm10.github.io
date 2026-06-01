@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 4: Arrays y Objetos</title>
+    <style>
+        body { font-family: sans-serif; margin: 30px; line-height: 1.6; background-color: #f4f6f9; }
+        .box { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        h2 { color: #2c3e50; margin-top: 0; border-bottom: 2px solid #ecf0f1; padding-bottom: 8px; }
+        button { padding: 8px 15px; background-color: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer; margin-bottom: 10px; }
+        button:hover { background-color: #2980b9; }
+        pre { background: #2c3e50; color: #fff; padding: 15px; border-radius: 4px; font-family: monospace; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Parte 1: Operaciones con Arrays</h2>
+    <button onclick="ejecutarPruebasArray()">Ejecutar Procesos de Array</button>
+    <pre id="pantalla-array">Haz clic para inicializar, modificar y recorrer el array...</pre>
+</div>
+
+<div class="box">
+    <h2>Parte 2: Manipulación de Objetos</h2>
+    <button onclick="ejecutarPruebasObjeto()">Ejecutar Procesos de Objeto</button>
+    <pre id="pantalla-objeto">Haz clic para crear, alterar y convertir el objeto persona...</pre>
+</div>
+
+<script>
+
+    // Función que busca el número mayor de un array
+    function buscarMayor(arrayNumeros) {
+        if (arrayNumeros.length === 0) return null;
+
+        let mayor = arrayNumeros[0];
+        for (let i = 1; i < arrayNumeros.length; i++) {
+            if (arrayNumeros[i] > mayor) {
+                mayor = arrayNumeros[i];
+            }
+        }
+        return mayor;
+    }
+
+    function ejecutarPruebasArray() {
+        let textoSalida = "";
+
+        // 1. Declara un array con los números del 1 al 5
+        let numeros = [1, 2, 3, 4, 5];
+        textoSalida += "1. Array inicial declarado: [" + numeros.join(", ") + "]\n";
+
+        // 2. Añade un número al final
+        numeros.push(6);
+        textoSalida += "2. Tras añadir un número al final (push): [" + numeros.join(", ") + "]\n";
+
+        // 3. Elimina el primer número
+        numeros.shift();
+        textoSalida += "3. Tras eliminar el primer número (shift): [" + numeros.join(", ") + "]\n";
+
+        // 4. Imprime todos los números usando un bucle
+        textoSalida += "4. Imprimiendo elementos mediante bucle for:\n";
+        for (let i = 0; i < numeros.length; i++) {
+            textoSalida += "   - Posición " + i + " contiene el valor: " + numeros[i] + "\n";
+        }
+
+        // 5. Probar función para encontrar el mayor
+        let numeroMayor = buscarMayor(numeros);
+        textoSalida += "5. El número más grande del array es: " + numeroMayor;
+
+        // Volcar resultados en la caja correspondiente
+        document.getElementById('pantalla-array').innerText = textoSalida;
+    }
+
+    // Función que recibe un objeto y devuelve un string con sus claves y valores
+    function obtenerClavesYValores(objeto) {
+        let resultado = "";
+        // Usamos el bucle for...in para recorrer las propiedades de un objeto de forma nativa
+        for (let clave in objeto) {
+            if (objeto.hasOwnProperty(clave)) {
+                resultado += clave + ": " + objeto[clave] + ", ";
+            }
+        }
+        // Eliminamos la última coma y el espacio sobrante antes de retornar
+        return resultado.slice(0, -2);
+    }
+
+    function ejecutarPruebasObjeto() {
+        let textoSalida = "";
+
+        // 1. Crea un objeto llamado persona con las propiedades de inicio
+        let persona = {
+            nombre: "Ana",
+            edad: 30,
+            ciudad: "Sevilla"
+        };
+        textoSalida += "1 & 2. Objeto creado. Mostrando propiedades de inicio:\n";
+        textoSalida += "   Nombre: " + persona.nombre + "\n";
+        textoSalida += "   Edad: " + persona.edad + "\n";
+        textoSalida += "   Ciudad: " + persona.ciudad + "\n\n";
+
+        // 2. Añade una propiedad llamada ocupacion
+        persona.ocupacion = "Desarrolladora";
+        textoSalida += "3. Tras añadir la propiedad 'ocupacion':\n" + JSON.stringify(persona, null, 2) + "\n\n";
+
+        // 3. Elimina la propiedad ciudad
+        delete persona.ciudad;
+        textoSalida += "4. Tras eliminar la propiedad 'ciudad' (delete):\n" + JSON.stringify(persona, null, 2) + "\n\n";
+
+        // 4. Aplicar función que devuelve string con claves y valores
+        let stringResultado = obtenerClavesYValores(persona);
+        textoSalida += "5. Resultado final de la función string (Claves y Valores):\n" + stringResultado;
+
+        // Volcar resultados en la caja correspondiente
+        document.getElementById('pantalla-objeto').innerText = textoSalida;
+    }
+</script>
+
+</body>
+</html>

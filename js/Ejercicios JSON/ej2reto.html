@@ -2,25 +2,45 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ejercicio 2 - RETO</title>
+    <title>Ejercicio 2 Reto</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        form { background-color: #f9f9f9; padding: 15px; border: 1px solid #ccc; width: 320px; margin-bottom: 20px; }
+        form p { margin: 10px 0; }
+        table { border-collapse: collapse; margin-top: 15px; width: 500px; }
+        th, td { padding: 8px; text-align: left; }
+        tr.fila-usuario { cursor: pointer; }
+        tr.fila-usuario:hover { background-color: #ffcccc; } /* Efecto visual para saber que se puede borrar */
+        #panel-estadisticas { background-color: #eef; padding: 10px; border: 1px solid #aad; width: 320px; margin-top: 15px; border-radius: 4px; }
+        #panel-estadisticas p { margin: 5px 0; font-weight: bold; }
+    </style>
 </head>
 <body>
 
-<h1>Ejercicio 2: Insertar datos dinámicos - RETO</h1>
+<h1>Ejercicio 2 Reto: Gestión de Usuarios</h1>
 
-<form id="formulario">
-    <input type="text" id="nombre" placeholder="Nombre">
-    <input type="text" id="apellidos" placeholder="Apellidos">
-    <input type="number" id="edad" placeholder="Edad">
-    <input type="text" id="ciudad" placeholder="Ciudad">
-    <button type="button" id="btn-ejecutar">Pulsa y observa la consola</button>
+<form id="formulario-usuario">
+    <p>
+        <label for="txt-nombre">Nombre:</label><br>
+        <input type="text" id="txt-nombre">
+    </p>
+    <p>
+        <label for="txt-apellidos">Apellidos:</label><br>
+        <input type="text" id="txt-apellidos">
+    </p>
+    <p>
+        <label for="txt-edad">Edad:</label><br>
+        <input type="number" id="txt-edad">
+    </p>
+    <p>
+        <label for="txt-ciudad">Ciudad:</label><br>
+        <input type="text" id="txt-ciudad">
+    </p>
+    <button type="submit">Agregar a la Tabla</button>
 </form>
 
-<div id="json-texto" style="margin-top: 15px;"></div>
-<div id="recuperado-texto"></div>
-
-<table border="1" id="tabla-datos" style="margin-top: 10px;">
+<table border="1" id="tabla-datos">
     <thead>
     <tr>
         <th>Nombre</th>
@@ -29,112 +49,138 @@
         <th>Ciudad</th>
     </tr>
     </thead>
-    <tbody id="cuerpo-tabla"></tbody>
+    <tbody id="cuerpo-tabla">
+    </tbody>
 </table>
 
-<div id="estadisticas" style="margin-top: 15px;"></div>
+<div id="panel-estadisticas">
+    <h3>Estadísticas de Edad</h3>
+    <p>Suma: <span id="est-suma">0</span></p>
+    <p>Media: <span id="est-media">0</span></p>
+    <p>Máximo: <span id="est-max">0</span></p>
+    <p>Mínimo: <span id="est-min">0</span></p>
+</div>
 
 <script>
-    function convertirAJSON(objeto) {
-        const resultado = JSON.stringify(objeto);
-        console.log("Serializado:", resultado);
-        return resultado;
+    // Contador global para generar IDs únicos de fila (ej: fila-1, fila-2...)
+    let contadorFilas = 0;
+
+    // Arreglo global para almacenar las edades activas en la tabla
+    let listaEdades = [];
+
+    // FUNCIÓN: Genera el elemento TR con sus atributos, eventos y IDs correspondientes
+    function crearFila(idFila, nombre, apellidos, edad, ciudad) {
+        // Creamos la estructura usando jQuery
+        const $nuevaFila = $(`
+            <tr id="${idFila}" class="fila-usuario">
+                <td>${nombre}</td>
+                <td>${apellidos}</td>
+                <td>${edad}</td>
+                <td>${ciudad}</td>
+            </tr>
+        `);
+
+        // REQUERIMIENTO: Añadir acción onclick al TR para eliminar la fila de la lista mediante su ID
+        $nuevaFila.attr('onclick', `eliminarFila('${idFila}', ${edad})`);
+
+        return $nuevaFila;
     }
 
-    function convertirAObjeto(jsonStr) {
-        const resultado = JSON.parse(jsonStr);
-        console.log("Deserializado:", resultado);
-        return resultado;
+    // FUNCIÓN: Elimina el elemento del DOM usando su ID y actualiza los cálculos
+    function eliminarFila(idFila, edadFila) {
+        // 1. Eliminar el TR usando .remove() nativo seleccionado por su ID con jQuery
+        $('#' + idFila).remove();
+
+        // 2. Buscar la edad en nuestro array y removerla
+        const indice = listaEdades.indexOf(edadFila);
+        if (indice !== -1) {
+            listaEdades.splice(indice, 1);
+        }
+
+        // 3. Recalcular y pintar las estadísticas actualizadas
+        actualizarEstadisticas();
     }
 
-    function calcularEstadisticas() {
-        const edades = [];
-
-        $('#cuerpo-tabla tr').each(function () {
-            const edad = parseInt($(this).find('td').eq(2).text());
-            if (!isNaN(edad)) edades.push(edad);
-        });
-
-        if (edades.length === 0) {
-            $('#estadisticas').text('');
+    // FUNCIÓN: Calcula Suma, Media, Máximo y Mínimo y los muestra en pantalla
+    function actualizarEstadisticas() {
+        if (listaEdades.length === 0) {
+            $('#est-suma').text(0);
+            $('#est-media').text(0);
+            $('#est-max').text(0);
+            $('#est-min').text(0);
             return;
         }
 
-        const suma = edades.reduce((a, b) => a + b, 0);
-        const media = (suma / edades.length).toFixed(2);
-        const maximo = Math.max(...edades);
-        const minimo = Math.min(...edades);
+        // Calcular Suma
+        let suma = 0;
+        for (let i = 0; i < listaEdades.length; i++) {
+            suma += listaEdades[i];
+        }
 
-        console.log("Suma:", suma, "| Media:", media, "| Máximo:", maximo, "| Mínimo:", minimo);
+        // Calcular Media
+        let media = suma / listaEdades.length;
 
-        $('#estadisticas').html(`
-            <strong>Suma:</strong> ${suma} &nbsp;&nbsp;
-            <strong>Media:</strong> ${media} &nbsp;&nbsp;
-            <strong>Máximo:</strong> ${maximo} &nbsp;&nbsp;
-            <strong>Mínimo:</strong> ${minimo}
-        `);
+        // Calcular Máximo y Mínimo usando funciones matemáticas nativas
+        let maximo = Math.max(...listaEdades);
+        let minimo = Math.min(...listaEdades);
+
+        // Volcar datos actualizados en el panel contenedor de la pantalla
+        $('#est-suma').text(suma);
+        $('#est-media').text(media.toFixed(1)); // Limita a un decimal si da inexacto
+        $('#est-max').text(maximo);
+        $('#est-min').text(minimo);
+
+        // También se imprime en consola tal como faculta el enunciado
+        console.log(`Estadísticas -> Suma: ${suma}, Media: ${media}, Máximo: ${maximo}, Mínimo: ${minimo}`);
     }
 
-    $(document).ready(function () {
+    // Evento Submit del formulario
+    $('#formulario-usuario').on('submit', function(e) {
+        e.preventDefault(); // Evitamos la recarga de página
 
-        $('#btn-ejecutar').on('click', function () {
+        // Captura de datos básicos
+        const nombre = $('#txt-nombre').val().trim();
+        const apellidos = $('#txt-apellidos').val().trim();
+        const edadTexto = $('#txt-edad').val().trim();
+        const ciudad = $('#txt-ciudad').val().trim();
 
-            // Validación de campos obligatorios
-            const campos = ['nombre', 'apellidos', 'edad', 'ciudad'];
-            for (const campo of campos) {
-                if ($('#' + campo).val().trim() === '') {
-                    alert('El campo ' + campo + ' es obligatorio');
-                    return;
-                }
-            }
+        // REQUERIMIENTO: Comprobación de campos rellenos uno a uno con alertas personalizadas
+        if (nombre === "") {
+            alert("El campo Nombre es obligatorio.");
+            return;
+        }
+        if (apellidos === "") {
+            alert("El campo Apellidos es obligatorio.");
+            return;
+        }
+        if (edadTexto === "") {
+            alert("El campo Edad es obligatorio.");
+            return;
+        }
+        if (ciudad === "") {
+            alert("El campo Ciudad es obligatorio.");
+            return;
+        }
 
-            const persona = {
-                nombre: $('#nombre').val().trim(),
-                apellidos: $('#apellidos').val().trim(),
-                edad: $('#edad').val().trim(),
-                ciudad: $('#ciudad').val().trim()
-            };
+        // Conversión numérica de la edad tras pasar las validaciones
+        const edad = parseInt(edadTexto);
 
-            // 1. Serializar
-            const jsonSerializado = convertirAJSON(persona);
-            $('#json-texto').text(jsonSerializado);
+        // Generar identificador secuencial único para este TR
+        contadorFilas++;
+        const idFilaUnico = "fila-" + contadorFilas;
 
-            // 2. Deserializar
-            const objetoRecuperado = convertirAObjeto(jsonSerializado);
+        // Registrar la edad en el array global
+        listaEdades.push(edad);
 
-            // 3. Mostrar texto
-            $('#recuperado-texto').text(
-                "Recuperado: nombre:" + objetoRecuperado.nombre +
-                ", apellidos:" + objetoRecuperado.apellidos +
-                ", edad:" + objetoRecuperado.edad +
-                ", ciudad:" + objetoRecuperado.ciudad
-            );
+        // Invocar la creación de la fila e inyectarla al tbody
+        const filaGenerada = crearFila(idFilaUnico, nombre, apellidos, edad, ciudad);
+        $('#cuerpo-tabla').append(filaGenerada);
 
-            // 4. Añadir fila a la tabla con id único y onclick para eliminar
-            const id = 'fila-' + Date.now();
-            const nuevaFila = $(`
-                <tr id="${id}" style="cursor:pointer;" title="Clic para eliminar">
-                    <td>${objetoRecuperado.nombre}</td>
-                    <td>${objetoRecuperado.apellidos}</td>
-                    <td>${objetoRecuperado.edad}</td>
-                    <td>${objetoRecuperado.ciudad}</td>
-                </tr>
-            `);
+        // Actualizar estadísticas de pantalla
+        actualizarEstadisticas();
 
-            nuevaFila.on('click', function () {
-                $('#' + id).remove();
-                calcularEstadisticas();
-            });
-
-            $('#cuerpo-tabla').append(nuevaFila);
-
-            // 5. Calcular estadísticas
-            calcularEstadisticas();
-
-            // Limpiar formulario
-            $('#formulario input').val('');
-        });
-
+        // Limpiar el formulario para la siguiente inserción
+        this.reset();
     });
 </script>
 

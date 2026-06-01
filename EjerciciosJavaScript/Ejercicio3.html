@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3: Funciones y Lógica</title>
+    <style>
+        body { font-family: sans-serif; margin: 30px; line-height: 1.6; background-color: #f9f9f9; }
+        .box { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        h2 { color: #333; margin-top: 0; }
+        button { padding: 8px 15px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+        pre { background: #eee; padding: 10px; border-radius: 4px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>1. Función Saludar</h2>
+    <button onclick="probarSaludar()">Probar Saludar</button>
+    <pre id="res-saludar">Haz clic en el botón para ver el resultado...</pre>
+</div>
+
+<div class="box">
+    <h2>2. Calcular Promedio</h2>
+    <button onclick="probarPromedio()">Probar Promedio (10 y 20)</button>
+    <pre id="res-promedio">Haz clic en el botón para ver el resultado...</pre>
+</div>
+
+<div class="box">
+    <h2>3. Analizar Número (Positivo, Negativo o Cero)</h2>
+    <button onclick="probarAnalizar()">Probar Analizar (-5, 0 y 8)</button>
+    <pre id="res-analizar">Haz clic en el botón para ver el resultado...</pre>
+</div>
+
+<div class="box">
+    <h2>4. Año Bisiesto</h2>
+    <button onclick="probarBisiesto()">Probar Bisiesto (2024 y 2026)</button>
+    <pre id="res-bisiesto">Haz clic en el botón para ver el resultado...</pre>
+</div>
+
+<script>
+
+    // 1. Función saludar
+    function saludar(nombre) {
+        return "Hola, " + nombre;
+    }
+
+    // 2. Función promedio de dos números
+    function calcularPromedio(num1, num2) {
+        return (num1 + num2) / 2;
+    }
+
+    // 3. Función analizar número
+    function analizarNumero(num) {
+        if (num > 0) {
+            return "Positivo";
+        } else if (num < 0) {
+            return "Negativo";
+        } else {
+            return "Cero";
+        }
+    }
+
+    // 4. Función año bisiesto
+    function esBisiesto(anio) {
+        if ((anio % 4 === 0 && anio % 100 !== 0) || (anio % 400 === 0)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function probarSaludar() {
+        let resultado = saludar("Alberto");
+        document.getElementById('res-saludar').innerText = resultado;
+    }
+
+    function probarPromedio() {
+        let resultado = calcularPromedio(10, 20);
+        document.getElementById('res-promedio').innerText = "El promedio es: " + resultado;
+    }
+
+    function probarAnalizar() {
+        let r1 = analizarNumero(-5);
+        let r2 = analizarNumero(0);
+        let r3 = analizarNumero(8);
+        document.getElementById('res-analizar').innerText =
+            "El número -5 es: " + r1 + "\n" +
+            "El número 0 es: " + r2 + "\n" +
+            "El número 8 es: " + r3;
+    }
+
+    function probarBisiesto() {
+        let r1 = esBisiesto(2024);
+        let r2 = esBisiesto(2026);
+        document.getElementById('res-bisiesto').innerText =
+            "¿El año 2024 es bisiesto?: " + r1 + "\n" +
+            "¿El año 2026 es bisiesto?: " + r2;
+    }
+</script>
+
+</body>
+</html>

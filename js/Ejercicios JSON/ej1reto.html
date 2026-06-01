@@ -2,12 +2,17 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>ej1reto.html</title>
+    <title>Ejercicio 1 RETO</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
 
-<h1>Ejercicio 1: Consulta de Usuarios - RETO</h1>
+<h1>Ejercicio 1 RETO: Consulta de Usuarios</h1>
+
+<button type="button" onclick="ejecutarProceso()">Pulsa y observa la consola</button>
+
+<div id="json-texto" style="margin-top: 15px;"></div>
+<div id="recuperado-texto"></div>
 
 <table border="1" id="tabla-datos" style="margin-top: 10px;">
     <thead>
@@ -20,10 +25,10 @@
     </thead>
     <tbody>
     <tr>
-        <td id="td-nombre"></td>
-        <td id="td-apellidos"></td>
-        <td id="td-edad"></td>
-        <td id="td-ciudad"></td>
+        <td id="celda-nombre"></td>
+        <td id="celda-apellidos"></td>
+        <td id="celda-edad"></td>
+        <td id="celda-ciudad"></td>
     </tr>
     </tbody>
 </table>
@@ -41,7 +46,7 @@
         return resultado;
     }
 
-    $(document).ready(function () {
+    function ejecutarProceso() {
 
         const persona = {
             nombre: "Alberto",
@@ -50,17 +55,27 @@
             ciudad: "Granada"
         };
 
+        // Proceso de Serialización
         const jsonSerializado = convertirAJSON(persona);
+        // Selección y asignación con jQuery ($) en lugar de document.getElementById().innerText
+        $('#json-texto').text(jsonSerializado);
 
-
+        // Proceso de Deserialización
         const objetoRecuperado = convertirAObjeto(jsonSerializado);
 
-        $('#td-nombre').text(objetoRecuperado.nombre);
-        $('#td-apellidos').text(objetoRecuperado.apellidos);
-        $('#td-edad').text(objetoRecuperado.edad);
-        $('#td-ciudad').text(objetoRecuperado.ciudad);
+        // Mostrar texto recuperado con jQuery
+        $('#recuperado-texto').text(
+            "Recuperado: nombre:" + objetoRecuperado.nombre +
+            ", apellidos:" + objetoRecuperado.apellidos +
+            ", edad:" + objetoRecuperado.edad +
+            ", ciudad:" + objetoRecuperado.ciudad
+        );
 
-    });
+        $('#celda-nombre').text(objetoRecuperado.nombre);
+        $('#celda-apellidos').text(objetoRecuperado.apellidos);
+        $('#celda-edad').text(objetoRecuperado.edad);
+        $('#celda-ciudad').text(objetoRecuperado.ciudad);
+    }
 </script>
 
 </body>

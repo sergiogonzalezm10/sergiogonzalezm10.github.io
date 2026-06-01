@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ejercicio 3</title>
+    <title>Ejercicio 3 Reto</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
         body { font-family: sans-serif; margin: 20px; }
@@ -20,7 +20,7 @@
 </head>
 <body>
 
-<h1>Ejercicio 3: Registro de Usuarios y Hobbies</h1>
+<h1>Ejercicio 3 Reto: Limitación de Hobbies en Tiempo Real</h1>
 
 <form id="formulario-usuario">
     <p>
@@ -40,7 +40,7 @@
         <input type="text" id="txt-ciudad">
     </p>
     <p>
-        <label>Hobbies:</label><br>
+        <label>Hobbies (Máximo 3):</label><br>
     <div class="zona-checkboxes">
         <label><input type="checkbox" name="hobbies[]" value="Deporte"> Deporte</label>
         <label><input type="checkbox" name="hobbies[]" value="Lectura"> Lectura</label>
@@ -63,7 +63,8 @@
         <th>Apellidos</th>
         <th>Edad</th>
         <th>Ciudad</th>
-        <th>Hobbies</th> </tr>
+        <th>Hobbies</th>
+    </tr>
     </thead>
     <tbody id="cuerpo-tabla">
     </tbody>
@@ -78,13 +79,26 @@
 </div>
 
 <script>
-    // Array global para mantener el almacenamiento persistente de los usuarios
     let listaUsuarios = [];
 
-    // FUNCIÓN MODIFICADA (generaTR): Agrega la celda para listar los hobbies
+    // =========================================================================
+    // LÓGICA DEL RETO: LIMITAR CHECKBOXES A UN MÁXIMO DE 3 EN TIEMPO REAL
+    // =========================================================================
+    $('input[name="hobbies[]"]').on('change', function() {
+        // Seleccionamos todos los checkboxes de hobbies y filtramos los que están marcados
+        const marcados = $('input[name="hobbies[]"]').filter(':checked').length;
+
+        if (marcados >= 3) {
+            // Si hay 3 o más seleccionados, deshabilitamos los que NO estén marcados (:not(:checked))
+            $('input[name="hobbies[]"]').not(':checked').prop('disabled', true);
+        } else {
+            // Si hay menos de 3, nos aseguramos de que todos vuelvan a estar habilitados
+            $('input[name="hobbies[]"]').prop('disabled', false);
+        }
+    });
+
+    // Funciones de renderizado y persistencia de datos (Heredadas de los retos anteriores)
     function generaTR(indice, usuario) {
-        // Unimos los elementos del array de hobbies con comas para mostrarlos estéticamente.
-        // Si no seleccionó ninguno, mostrará "Ninguno".
         const hobbiesTexto = usuario.hobbies.length > 0 ? usuario.hobbies.join(", ") : "Ninguno";
 
         const $nuevaFila = $(`
@@ -93,56 +107,44 @@
                 <td>${usuario.apellidos}</td>
                 <td>${usuario.edad}</td>
                 <td>${usuario.ciudad}</td>
-                <td>${hobbiesTexto}</td> </tr>
+                <td>${hobbiesTexto}</td>
+            </tr>
         `);
 
-        // Acción al hacer click para eliminar usando el índice del array
         $nuevaFila.attr('onclick', `eliminarRegistro(${indice})`);
-
         return $nuevaFila;
     }
 
-    // FUNCIÓN: Limpia y reconstruye la tabla basándose en el estado del array
     function generaTabla(listaDeDatos) {
         const $tbody = $('#cuerpo-tabla');
-        $tbody.empty(); // Limpieza del DOM
+        $tbody.empty();
 
         listaDeDatos.forEach(function(usuario, indice) {
             const $filaHtml = generaTR(indice, usuario);
             $tbody.append($filaHtml);
         });
 
-        // Actualizamos el cuadro estadístico de edades
         actualizarEstadisticas(listaDeDatos);
     }
 
-    // FUNCIÓN: Añade mediante un push el objeto de datos (con su array de hobbies)
     function agregarAlArray(nombre, apellidos, edad, ciudad, hobbiesSeleccionados) {
         const nuevoUsuario = {
             nombre: nombre,
             apellidos: apellidos,
             edad: parseInt(edad),
             ciudad: ciudad,
-            hobbies: hobbiesSeleccionados // Guardamos el array de strings directamente
+            hobbies: hobbiesSeleccionados
         };
 
         listaUsuarios.push(nuevoUsuario);
-
-        // Opcional: Serialización demostrativa en consola para verificar el formato JSON
-        console.log("JSON de la lista estructurada:", JSON.stringify(listaUsuarios));
-
-        // Reconstruimos la tabla con el nuevo estado
         generaTabla(listaUsuarios);
     }
 
-    // FUNCIÓN: Elimina el registro del array mediante el índice
     function eliminarRegistro(indice) {
         listaUsuarios.splice(indice, 1);
-        console.log(`Registro borrado en el índice [${indice}]. Estado actual:`, listaUsuarios);
         generaTabla(listaUsuarios);
     }
 
-    // FUNCIÓN AUXILIAR: Operaciones matemáticas sobre las edades de la lista
     function actualizarEstadisticas(usuarios) {
         if (usuarios.length === 0) {
             $('#est-suma').text(0);
@@ -170,35 +172,31 @@
         $('#est-min').text(minimo);
     }
 
-    // Controlador del envío del formulario
     $('#formulario-usuario').on('submit', function(e) {
-        e.preventDefault(); // Evita recarga de página
+        e.preventDefault();
 
-        // Captura de datos de texto normales
         const nombre = $('#txt-nombre').val().trim();
         const apellidos = $('#txt-apellidos').val().trim();
         const edadTexto = $('#txt-edad').val().trim();
         const ciudad = $('#txt-ciudad').val().trim();
 
-        // Validaciones obligatorias heredadas
         if (nombre === "") { alert("El campo Nombre es obligatorio."); return; }
         if (apellidos === "") { alert("El campo Apellidos es obligatorio."); return; }
         if (edadTexto === "") { alert("El campo Edad es obligatorio."); return; }
         if (ciudad === "") { alert("El campo Ciudad es obligatorio."); return; }
 
-        // APLICACIÓN DEL ENUNCIADO: Captura avanzada del estado de los checkboxes usando jQuery
         const hobbiesListado = $('input[name="hobbies[]"]')
             .filter(':checked')
             .map(function () {
                 return $(this).val();
             })
-            .get(); // .get() convierte el mapeo de jQuery en un Array nativo de JS
+            .get();
 
-        // Procesamos la inserción en el origen de datos centralizado
         agregarAlArray(nombre, apellidos, edadTexto, ciudad, hobbiesListado);
 
-        // Reseteamos por completo el formulario (limpia textos e inputs de checkbox automáticamente)
+        // Al resetear el formulario se limpian los inputs, pero debemos reactivar los checkboxes bloqueados manualmente
         this.reset();
+        $('input[name="hobbies[]"]').prop('disabled', false);
     });
 </script>
 

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejericio 4 RETO</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body { font-family: sans-serif; margin: 20px; line-height: 1.6; }
+        form { background-color: #f9f9f9; padding: 15px; border: 1px solid #ccc; width: 350px; margin-bottom: 20px; border-radius: 4px; }
+        form p { margin: 10px 0; }
+        table { border-collapse: collapse; margin-top: 15px; width: 100%; max-width: 700px; }
+        th, td { padding: 10px; text-align: left; border: 1px solid #aaa; }
+        th { background-color: #f2f2f2; }
+        /* Estilo explícito solicitado para el H2 de error */
+        .mensaje-error { color: red; font-weight: bold; }
+        .mensaje-ok { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<h1>Ejericio 4 RETO: Inserción y Consulta de Productos</h1>
+
+<h2 id="notificacion-servidor"></h2>
+
+<form id="form-producto">
+    <p>
+        <label for="txt-descripcion">Descripción del Producto:</label><br>
+        <input type="text" id="txt-descripcion" required placeholder="Ej: Teclado Mecánico">
+    </p>
+    <p>
+        <label for="txt-proveedor">ID Proveedor (Número):</label><br>
+        <input type="number" id="txt-proveedor" required placeholder="Ej: 102">
+    </p>
+    <p>
+        <label for="txt-precio">Precio (€):</label><br>
+        <input type="number" id="txt-precio" step="0.01" min="0" max="999.99" required placeholder="Ej: 49.99">
+    </p>
+    <button type="submit">Enviar al Servidor</button>
+</form>
+
+<table id="tabla-productos">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Descripción</th>
+        <th>ID Proveedor</th>
+        <th>Precio</th>
+    </tr>
+    </thead>
+    <tbody id="cuerpo-tabla">
+    </tbody>
+</table>
+
+<script>
+    // URL del endpoint suministrado en el enunciado
+    const URL_RETO4 = "https://lm.iesnervion.es/reto4.php";
+
+    // FUNCIÓN: Se encarga de limpiar la tabla y dibujar cada producto devuelto por el servidor
+    function generaTabla(listaProductos) {
+        const $tbody = $('#cuerpo-tabla');
+        $tbody.empty(); // Eliminamos las filas anteriores antes de crear las nuevas
+
+        // Verificamos que lo recibido sea un array válido
+        if (!listaProductos || listaProductos.length === 0) {
+            $tbody.append('<tr><td colspan="4" style="text-align:center;">No hay productos registrados.</td></tr>');
+            return;
+        }
+
+        // Estructura de bucle forEach exigida por las especificaciones de la unidad
+        listaProductos.forEach(function(item) {
+            // Mapeamos las propiedades exactas correspondientes a las columnas de la Base de Datos
+            const id = item.id || "--";
+            const descripcion = item.descripcion || "Sin descripción";
+            const idProveedor = item.idProveedor || "Desconocido";
+            // Formateamos el precio para que muestre el símbolo del euro
+            const precio = item.precio !== undefined ? parseFloat(item.precio).toFixed(2) + " €" : "0.00 €";
+
+            // Inyectamos el TR directamente utilizando la función append de jQuery
+            $tbody.append(`
+                <tr>
+                    <td>${id}</td>
+                    <td>${descripcion}</td>
+                    <td>${idProveedor}</td>
+                    <td>${precio}</td>
+                </tr>
+            `);
+        });
+    }
+
+    // Controlador del evento Submit del formulario
+    $('#form-producto').on('submit', async function(e) {
+        e.preventDefault(); // Evita que la página se refresque al enviar
+
+        // Captura de datos del formulario usando jQuery
+        const descripcion = $('#txt-descripcion').val().trim();
+        const idProveedor = parseInt($('#txt-proveedor').val().trim());
+        const precio = parseFloat($('#txt-precio').val().trim());
+
+        // Construcción del objeto mapeando con la estructura de la tabla de la Base de Datos
+        const productoData = {
+            descripcion: descripcion,
+            idProveedor: idProveedor,
+            precio: precio
+        };
+
+        // Reseteamos el elemento H2 de notificaciones antes de la petición
+        $('#notificacion-servidor').removeClass('mensaje-error mensaje-ok').text("Enviando datos...");
+
+        try {
+            // 1. SERIALIZACIÓN Y ENVÍO: Petición POST enviando los datos en formato JSON
+            const respuesta = await fetch(URL_RETO4, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8'
+                },
+                body: JSON.stringify(productoData) // Serialización mediante JSON.stringify()
+            });
+
+            if (!respuesta.ok) {
+                throw new Error("No se ha podido establecer comunicación con el servidor remoto.");
+            }
+
+            // 2. DESERIALIZACIÓN Y RECEPCIÓN: El servidor nos devuelve un objeto que contiene 'lista' y 'error'
+            const datosServidor = await respuesta.json();
+
+            // REQUERIMIENTO: Uso de la consola para observar la estructura exacta recibida
+            console.log("Respuesta Completa del Servidor (Reto 4):", datosServidor);
+
+            // 3. ANÁLISIS DEL ERROR Y RENDERIZADO:
+            // Si el error es NULL o no existe, todo fue OK
+            if (datosServidor.error === null || !datosServidor.error) {
+                $('#notificacion-servidor')
+                    .addClass('mensaje-ok')
+                    .text("Todo fue OK: ¡Producto guardado con éxito!");
+            } else {
+                // Si devuelve un mensaje de error, se muestra en el h2 (Rojo y Negrita gracias a la clase .mensaje-error)
+                $('#notificacion-servidor')
+                    .addClass('mensaje-error')
+                    .text("Error en el Servidor: " + datosServidor.error);
+            }
+
+            // Pasamos la lista recuperada del objeto a la función encargada de generar la tabla
+            // Usamos un fallback por si el servidor devuelve la propiedad con un nombre diferente (ej: 'productos' o el array directo)
+            const arrayProductos = datosServidor.lista || datosServidor.productos || datosServidor;
+            generaTabla(arrayProductos);
+
+            // Limpieza del formulario para la próxima inserción si todo ha salido bien
+            $('#form-producto')[0].reset();
+
+        } catch (error) {
+            console.error("Fallo crítico en la petición:", error);
+            $('#notificacion-servidor')
+                .addClass('mensaje-error')
+                .text("Error de red / conexión: " + error.message);
+        }
+    });
+</script>
+
+</body>
+</html>

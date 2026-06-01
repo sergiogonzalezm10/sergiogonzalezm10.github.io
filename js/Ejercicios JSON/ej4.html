@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 4</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        form { background-color: #f9f9f9; padding: 15px; border: 1px solid #ccc; width: 350px; margin-bottom: 20px; }
+        form p { margin: 10px 0; }
+        .zona-checkboxes { margin-top: 5px; padding: 5px; border: 1px dashed #bbb; background: #fff; }
+        .zona-checkboxes label { margin-right: 10px; display: inline-block; cursor: pointer; }
+        table { border-collapse: collapse; margin-top: 15px; width: 650px; }
+        th, td { padding: 8px; text-align: left; }
+        tr.fila-usuario { cursor: pointer; }
+        tr.fila-usuario:hover { background-color: #ffcccc; }
+        #panel-estadisticas { background-color: #eef; padding: 10px; border: 1px solid #aad; width: 350px; margin-top: 15px; border-radius: 4px; }
+        #panel-estadisticas p { margin: 5px 0; font-weight: bold; }
+        .mensaje-info { color: blue; font-weight: bold; margin: 10px 0; }
+    </style>
+</head>
+<body>
+
+<h1>Ejercicio 4: Envío y Recepción con Servidor (eco.php)</h1>
+
+<form id="formulario-usuario">
+    <p>
+        <label for="txt-nombre">Nombre:</label><br>
+        <input type="text" id="txt-nombre">
+    </p>
+    <p>
+        <label for="txt-apellidos">Apellidos:</label><br>
+        <input type="text" id="txt-apellidos">
+    </p>
+    <p>
+        <label for="txt-edad">Edad:</label><br>
+        <input type="number" id="txt-edad">
+    </p>
+    <p>
+        <label for="txt-ciudad">Ciudad:</label><br>
+        <input type="text" id="txt-ciudad">
+    </p>
+    <p>
+        <label>Hobbies (Máximo 3):</label><br>
+    <div class="zona-checkboxes">
+        <label><input type="checkbox" name="hobbies[]" value="Deporte"> Deporte</label>
+        <label><input type="checkbox" name="hobbies[]" value="Lectura"> Lectura</label>
+        <label><input type="checkbox" name="hobbies[]" value="Música"> Música</label>
+        <label><input type="checkbox" name="hobbies[]" value="Juegos"> Juegos</label>
+        <label><input type="checkbox" name="hobbies[]" value="Cine"> Cine</label>
+        <label><input type="checkbox" name="hobbies[]" value="Teatro"> Teatro</label>
+        <label><input type="checkbox" name="hobbies[]" value="Coleccionismo"> Coleccionismo</label>
+        <label><input type="checkbox" name="hobbies[]" value="Bricolaje"> Bricolaje</label>
+        <label><input type="checkbox" name="hobbies[]" value="Cosplay"> Cosplay</label>
+    </div>
+    </p>
+    <button type="submit">Agregar y Sincronizar</button>
+</form>
+
+<div id="estado-conexion" class="mensaje-info"></div>
+
+<table border="1" id="tabla-datos">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Edad</th>
+        <th>Ciudad</th>
+        <th>Hobbies</th>
+    </tr>
+    </thead>
+    <tbody id="cuerpo-tabla">
+    </tbody>
+</table>
+
+<div id="panel-estadisticas">
+    <h3>Estadísticas del Servidor</h3>
+    <p>Suma: <span id="est-suma">0</span></p>
+    <p>Media: <span id="est-media">0</span></p>
+    <p>Máximo: <span id="est-max">0</span></p>
+    <p>Mínimo: <span id="est-min">0</span></p>
+</div>
+
+<script>
+    // Dirección proporcionada en el enunciado
+    const URL_SERVIDOR = "https://lm.iesnervion.es/eco.php";
+
+    // Almacenamiento local para mantener el estado de la lista antes del envío
+    let listaUsuarios = [];
+
+    // Lógica para limitar la selección de checkboxes a un máximo de 3 (Reto anterior)
+    $('input[name="hobbies[]"]').on('change', function() {
+        const marcados = $('input[name="hobbies[]"]').filter(':checked').length;
+        if (marcados >= 3) {
+            $('input[name="hobbies[]"]').not(':checked').prop('disabled', true);
+        } else {
+            $('input[name="hobbies[]"]').prop('disabled', false);
+        }
+    });
+
+    // FUNCIÓN DE RENDERIZADO (generaTR): Conserva los parámetros de los ejercicios anteriores
+    function generaTR(indice, usuario) {
+        const hobbiesTexto = usuario.hobbies && usuario.hobbies.length > 0 ? usuario.hobbies.join(", ") : "Ninguno";
+
+        const $nuevaFila = $(`
+            <tr id="fila-${indice}" class="fila-usuario">
+                <td>${usuario.nombre}</td>
+                <td>${usuario.apellidos}</td>
+                <td>${usuario.edad}</td>
+                <td>${usuario.ciudad}</td>
+                <td>${hobbiesTexto}</td>
+            </tr>
+        `);
+
+        $nuevaFila.attr('onclick', `eliminarRegistro(${indice})`);
+        return $nuevaFila;
+    }
+
+    // FUNCIÓN PRINCIPAL DE ASIGNACIÓN (generaTabla): Ahora procesa la respuesta del servidor
+    function generaTabla(objetoRespuestaServidor) {
+        const $tbody = $('#cuerpo-tabla');
+        $tbody.empty(); // Limpiamos la tabla en pantalla
+
+        // Dependiendo de cómo estructure la respuesta el archivo eco.php,
+        // recuperamos el array de usuarios devuelto.
+        const usuariosRecuperados = objetoRespuestaServidor.usuarios || objetoRespuestaServidor.lista || objetoRespuestaServidor;
+
+        if (Array.isArray(usuariosRecuperados)) {
+            usuariosRecuperados.forEach(function(usuario, indice) {
+                const $filaHtml = generaTR(indice, usuario);
+                $tbody.append($filaHtml);
+            });
+        }
+
+        // ASIGNACIÓN EXIGIDA: Pintamos en el panel los cálculos estadísticos devueltos directamente por el servidor
+        // Si el servidor no envía las propiedades calculadas, usa los valores por defecto del objeto o del fallback (|| 0)
+        $('#est-suma').text(objetoRespuestaServidor.suma !== undefined ? objetoRespuestaServidor.suma : objetoRespuestaServidor.Suma || 0);
+        $('#est-media').text(objetoRespuestaServidor.media !== undefined ? objetoRespuestaServidor.media : objetoRespuestaServidor.Media || 0);
+        $('#est-max').text(objetoRespuestaServidor.max !== undefined ? objetoRespuestaServidor.max : objetoRespuestaServidor.Máximo || 0);
+        $('#est-min').text(objetoRespuestaServidor.min !== undefined ? objetoRespuestaServidor.min : objetoRespuestaServidor.Mínimo || 0);
+    }
+
+    // FUNCIÓN DE COMUNICACIÓN ASÍNCRONA: Serializa la lista, la envía mediante POST y deserializa la respuesta
+    async function sincronizarConServidor() {
+        $('#estado-conexion').text("Sincronizando datos con el servidor...");
+
+        try {
+            // Realizamos la petición POST enviando toda la lista actual serializada en JSON
+            const respuesta = await fetch(URL_SERVIDOR, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8'
+                },
+                body: JSON.stringify(listaUsuarios) // Serialización de la lista actual incluyendo la nueva inserción
+            });
+
+            if (!respuesta.ok) {
+                throw new Error("Error en la comunicación con el servidor remoto.");
+            }
+
+            // Recibimos y deserializamos automáticamente el JSON devuelto por el eco
+            const datosRecuperados = await respuesta.json();
+            console.log("Respuesta del servidor eco.php:", datosRecuperados);
+
+            $('#estado-conexion').text("¡Sincronización completada con éxito!");
+
+            // Pasamos la variable recuperada a la función para reconstruir la tabla y las estadísticas
+            generaTabla(datosRecuperados);
+
+        } catch (error) {
+            console.error(error);
+            $('#estado-conexion').html(`<span style="color:red;">Fallo de sincronización: ${error.message} (Cargando datos locales)</span>`);
+
+            // Fallback: Si el servidor falla o no tienes internet, calcula y dibuja en local de forma preventiva
+            let mockCalculos = {
+                usuarios: listaUsuarios,
+                suma: listaUsuarios.reduce((acc, u) => acc + u.edad, 0),
+                media: listaUsuarios.length ? (listaUsuarios.reduce((acc, u) => acc + u.edad, 0) / listaUsuarios.length).toFixed(1) : 0,
+                max: listaUsuarios.length ? Math.max(...listaUsuarios.map(u => u.edad)) : 0,
+                min: listaUsuarios.length ? Math.min(...listaUsuarios.map(u => u.edad)) : 0
+            };
+            generaTabla(mockCalculos);
+        }
+    }
+
+    // CONTROL DE BORRADO: Elimina del array local y vuelve a sincronizar el estado limpio con el servidor
+    function eliminarRegistro(indice) {
+        listaUsuarios.splice(indice, 1); // Desaparece la fila del ARRAY usando el índice
+        console.log(`Registro removido del índice [${indice}]. Actualizando servidor...`);
+        sincronizarConServidor();
+    }
+
+    // Evento Submit del formulario
+    $('#formulario-usuario').on('submit', function(e) {
+        e.preventDefault();
+
+        const nombre = $('#txt-nombre').val().trim();
+        const apellidos = $('#txt-apellidos').val().trim();
+        const edadTexto = $('#txt-edad').val().trim();
+        const ciudad = $('#txt-ciudad').val().trim();
+
+        if (nombre === "" || apellidos === "" || edadTexto === "" || ciudad === "") {
+            alert("Todos los campos de texto son obligatorios.");
+            return;
+        }
+
+        const hobbiesListado = $('input[name="hobbies[]"]')
+            .filter(':checked')
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+
+        // Creamos el objeto del usuario e introducimos los datos del formulario al array (push)
+        const nuevoUsuario = {
+            nombre: nombre,
+            apellidos: apellidos,
+            edad: parseInt(edadTexto),
+            ciudad: ciudad,
+            hobbies: hobbiesListado
+        };
+        listaUsuarios.push(nuevoUsuario);
+
+        // Disparamos el proceso de envío de la lista completa al servidor
+        sincronizarConServidor();
+
+        // Reseteamos el formulario y reactivamos las casillas bloqueadas
+        this.reset();
+        $('input[name="hobbies[]"]').prop('disabled', false);
+    });
+</script>
+
+</body>
+</html>

@@ -2,24 +2,55 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ejercicio 1</title>
+    <title>Ejercicio 2</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        form {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #ccc;
+            width: 300px;
+            margin-bottom: 20px;
+        }
+        form p {
+            margin: 10px 0;
+        }
+        table {
+            border-collapse: collapse;
+            margin-top: 15px;
+            width: 500px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
 
-<h1>Ejercicio 2: Insertar datos dinámicos</h1>
+<h1>Ejercicio 2: Inserción de Usuarios</h1>
 
-<form id="formulario">
-    <input type="text" id="nombre" placeholder="Nombre" required>
-    <input type="text" id="apellidos" placeholder="Apellidos" required>
-    <input type="number" id="edad" placeholder="Edad" required>
-    <input type="text" id="ciudad" placeholder="Ciudad" required>
-    <button type="button" onclick="ejecutarProceso()">Pulsa y observa la consola</button>
+<form id="formulario-usuario">
+    <p>
+        <label for="txt-nombre">Nombre:</label><br>
+        <input type="text" id="txt-nombre" required>
+    </p>
+    <p>
+        <label for="txt-apellidos">Apellidos:</label><br>
+        <input type="text" id="txt-apellidos" required>
+    </p>
+    <p>
+        <label for="txt-edad">Edad:</label><br>
+        <input type="number" id="txt-edad" required>
+    </p>
+    <p>
+        <label for="txt-ciudad">Ciudad:</label><br>
+        <input type="text" id="txt-ciudad" required>
+    </p>
+    <button type="submit">Agregar a la Tabla</button>
 </form>
 
-<div id="json-texto" style="margin-top: 15px;"></div>
-<div id="recuperado-texto"></div>
-
-<table border="1" id="tabla-datos" style="margin-top: 10px;">
+<table border="1" id="tabla-datos">
     <thead>
     <tr>
         <th>Nombre</th>
@@ -28,55 +59,48 @@
         <th>Ciudad</th>
     </tr>
     </thead>
-    <tbody>
-    <tr id="fila-datos"></tr>
+    <tbody id="cuerpo-tabla">
     </tbody>
 </table>
 
 <script>
-    // Funciones de conversión
-    function convertirAJSON(objeto) {
-        const resultado = JSON.stringify(objeto);
-        console.log("Serializado:", resultado);
-        return resultado;
+    // FUNCIÓN SOLICITADA: Crea la estructura de la fila en memoria y la devuelve
+    function crearFila(nombre, apellidos, edad, ciudad) {
+        // Creamos un elemento TR usando la sintaxis de jQuery
+        const $nuevaFila = $('<tr></tr>');
+
+        // Insertamos el contenido estructurado de las celdas (TD)
+        $nuevaFila.html(`
+            <td>${nombre}</td>
+            <td>${apellidos}</td>
+            <td>${edad}</td>
+            <td>${ciudad}</td>
+        `);
+
+        // Devolvemos el nodo TR listo para ser usado
+        return $nuevaFila;
     }
 
-    function convertirAObjeto(jsonStr) {
-        const resultado = JSON.parse(jsonStr);
-        console.log("Deserializado:", resultado);
-        return resultado;
-    }
+    // Controlador del evento submit del formulario
+    $('#formulario-usuario').on('submit', function(e) {
+        // VITAL: Evita la recarga de la página al procesar el formulario
+        e.preventDefault();
 
-    function ejecutarProceso() {
-        // Recoger datos del formulario en un objeto
-        const persona = {
-            nombre: document.getElementById('nombre').value,
-            apellidos: document.getElementById('apellidos').value,
-            edad: document.getElementById('edad').value,
-            ciudad: document.getElementById('ciudad').value
-        };
+        // Recolección y limpieza de los valores de los inputs con jQuery
+        const nombre = $('#txt-nombre').val().trim();
+        const apellidos = $('#txt-apellidos').val().trim();
+        const edad = $('#txt-edad').val().trim();
+        const ciudad = $('#txt-ciudad').val().trim();
 
-        // 1. Serializar
-        const jsonSerializado = convertirAJSON(persona);
-        document.getElementById('json-texto').innerText = jsonSerializado;
+        // Invocamos la función para generar la fila estructurada
+        const filaGenerada = crearFila(nombre, apellidos, edad, ciudad);
 
-        // 2. Deserializar
-        const objetoRecuperado = convertirAObjeto(jsonSerializado);
+        // Adjuntamos (append) la fila devuelta al tbody de la tabla
+        $('#cuerpo-tabla').append(filaGenerada);
 
-        // 3. Mostrar texto y tabla
-        document.getElementById('recuperado-texto').innerText =
-            "Recuperado: nombre:" + objetoRecuperado.nombre +
-            ", apellidos:" + objetoRecuperado.apellidos +
-            ", edad:" + objetoRecuperado.edad +
-            ", ciudad:" + objetoRecuperado.ciudad;
-
-        document.getElementById('fila-datos').innerHTML = `
-                <td>${objetoRecuperado.nombre}</td>
-                <td>${objetoRecuperado.apellidos}</td>
-                <td>${objetoRecuperado.edad}</td>
-                <td>${objetoRecuperado.ciudad}</td>
-            `;
-    }
+        // Limpieza automática del formulario para poder introducir un nuevo registro
+        this.reset();
+    });
 </script>
 
 </body>
