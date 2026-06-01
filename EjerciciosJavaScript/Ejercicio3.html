@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3</title>
+</head>
+<body>
+
+</body>
+
+<script>
+
+    // Ejercicio 1
+    function saludar(nombre) {
+        return `Hola, ${nombre}`;
+    };
+
+    console.log(saludar("Ibai"))
+
+    // Ejercicio 2
+    function promedio(num1, num2) {
+        let media = (num1 + num2) / 2;
+        return media;
+    };
+
+    console.log(promedio(5,5));
+
+    // Ejercicio 3
+    function comprobarNumero(numero) {
+        if (numero > 0) {
+            return `${numero} es Positivo`;
+        } else if (numero < 0) {
+            return `${numero} es Negativo`;
+        } else {
+            return `${numero} es Cero`
+        }
+    };
+
+    console.log(comprobarNumero(1));
+
+    // Ejercicio 4
+    function esBisiesto(año) {
+        if (( año % 4 === 0 && año % 100 !== 0 ) || ( año % 400 === 0)){
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    console.log("Es bisiesto: " + esBisiesto(2024));
+
+
+</script>
+</html>

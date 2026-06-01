@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 4</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    // Ejercicio 1
+    let numeros = [1, 2, 3 , 4, 5];
+    numeros.push(6);
+
+    numeros.pop();
+
+    numeros.forEach(function(numeros) {
+        console.log(numeros);
+    });
+
+    // Ejercicio 2
+    function mayorNumero(numeromayor) {
+        let mayor = numeromayor[0];
+        for (let i = 1; i < numeromayor.length; i++) {
+            if ( numeromayor[i] > mayor) {
+                mayor = numeromayor[i];
+            }
+        }
+        return mayor;
+    }
+
+    let array = [ 2 , 10 , 6 , 20 ,  15];
+    console.log(mayorNumero(array));
+
+    // Ejercicio 3
+    let persona = {
+        nombre: "Quevedo",
+        edad: 18,
+        ciudad: "Sevilla"
+    };
+
+    console.log(persona.nombre);
+    console.log(persona.edad);
+    console.log(persona.ciudad);
+
+    persona.ocupacion = "Jardinero";
+
+    console.log(persona);
+
+    delete persona.ocupacion;
+
+    console.log(persona);
+
+
+    // Ejercicio 4
+    function mostrarObjeto(obj) {
+        let claves = Object.keys(obj);   // obtenemos las claves
+        let valores = Object.values(obj); // obtenemos los valores
+        let resultado = "";
+
+        for (let i = 0; i < claves.length; i++) {
+            resultado += `${claves[i]}: ${valores[i]}\n`;
+        }
+
+        return resultado;
+    }
+
+    let personaEjemplo = { nombre: "Ana", edad: 30, ciudad: "Barcelona" };
+    console.log(mostrarObjeto(personaEjemplo));
+</script>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Adivinar el Número</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        input { width: 50px; text-align: center; }
+        button { margin-top: 10px; padding: 5px 10px; }
+        .info { margin: 10px 0; font-size: 1.2em; }
+        .mensaje { font-weight: bold; margin: 15px 0; }
+    </style>
+</head>
+<body>
+<h1>Adivina el Número</h1>
+
+<p>Introduce un número del 1 al 100:</p>
+<input type="number" id="numeroUsuario" min="1" max="100">
+<button onclick="adivinar()">¡Adivinar!</button>
+
+<div class="mensaje" id="mensaje"></div>
+
+<div class="info">
+    <p>Puntos totales: <span id="puntosTotales">0</span></p>
+    <p>Puntos en cartera: <span id="cartera">10</span></p>
+    <p>Partidas jugadas: <span id="partidas">0</span></p>
+    <p>Partidas ganadas: <span id="ganadas">0</span></p>
+</div>
+
+<button id="reiniciar" onclick="reiniciar()" style="display:none;">Reiniciar Juego</button>
+
+<script>
+    let numeroSecreto;
+    let puntosTotales = 0;
+    let cartera = 10;
+    let partidas = 0;
+    let ganadas = 0;
+
+    function iniciarJuego() {
+        numeroSecreto = Math.floor(Math.random() * 100) + 1;
+        cartera = 10;
+        document.getElementById("cartera").textContent = cartera;
+        document.getElementById("mensaje").textContent = "";
+        document.getElementById("reiniciar").style.display = "none";
+        document.getElementById("numeroUsuario").value = "";
+    }
+
+    function adivinar() {
+        let intento = Number(document.getElementById("numeroUsuario").value);
+        if (intento < 1 || intento > 100) {
+            document.getElementById("mensaje").textContent = "Introduce un número entre 1 y 100.";
+            return;
+        }
+
+        if (intento === numeroSecreto) {
+            document.getElementById("mensaje").textContent = `¡Felicidades! Adivinaste el número ${numeroSecreto}.`;
+            puntosTotales += cartera;
+            ganadas++;
+            partidas++;
+            document.getElementById("puntosTotales").textContent = puntosTotales;
+            document.getElementById("partidas").textContent = partidas;
+            document.getElementById("ganadas").textContent = ganadas;
+            document.getElementById("reiniciar").style.display = "inline-block";
+        } else {
+            cartera--;
+            document.getElementById("cartera").textContent = cartera;
+            if (cartera === 0) {
+                document.getElementById("mensaje").textContent = `¡Has perdido! El número era ${numeroSecreto}.`;
+                partidas++;
+                document.getElementById("partidas").textContent = partidas;
+                document.getElementById("reiniciar").style.display = "inline-block";
+            } else {
+                let pista = intento < numeroSecreto ? "más alto" : "más bajo";
+                document.getElementById("mensaje").textContent = `Intenta un número ${pista}.`;
+            }
+        }
+
+        document.getElementById("numeroUsuario").value = "";
+    }
+
+    function reiniciar() {
+        iniciarJuego();
+    }
+
+    // Iniciar juego la primera vez
+    iniciarJuego();
+</script>
+</body>
+</html>

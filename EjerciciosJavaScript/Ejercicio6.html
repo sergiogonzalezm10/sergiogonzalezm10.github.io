@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Edad</title>
+    <style>
+        #mensaje {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<h2>Formulario de Edad</h2>
+<input type="text" id="nombre" placeholder="Ingresa tu nombre">
+<input type="text" id="apellidos" placeholder="Ingresa tus apellidos">
+<input type="date" id="fechanacimiento" placeholder="Ingresa tu fecha de nacimiento">
+<button onclick="calcularEdad()">Enviar</button>
+
+<p id="mensaje"></p>
+<p id="mediaEdad"></p>
+
+<script>
+    let edades = []; // Array para guardar todas las edades
+
+        // Borrar mensaje cuando el usuario hace focus en cualquier input
+    document.getElementById("nombre").addEventListener("focusin", borrarMensajes);
+    document.getElementById("apellidos").addEventListener("focusin", borrarMensajes);
+    document.getElementById("fechanacimiento").addEventListener("focusin", borrarMensajes);
+
+    function borrarMensajes() {
+        document.getElementById("mensaje").textContent = "";
+        document.getElementById("mediaEdad").textContent = "";
+    }
+
+    function calcularEdad() {
+        let nombre = document.getElementById("nombre").value.trim();
+        let apellidos = document.getElementById("apellidos").value.trim();
+        let fechaNacimiento = document.getElementById("fechanacimiento").value;
+
+        if (!nombre || !apellidos || !fechaNacimiento) {
+            mostrarMensaje("Por favor, completa todos los campos.", "red");
+            return;
+        }
+
+        let añoNacimiento = new Date(fechaNacimiento).getFullYear();
+        let añoActual = new Date().getFullYear();
+        let edad = añoActual - añoNacimiento;
+
+        // Validación de edad
+        if (edad < 0 || edad > 120) {
+            mostrarMensaje("Edad inválida. Debe ser entre 0 y 120 años.", "red");
+            return;
+        }
+
+        // Guardar la edad en el array
+        edades.push(edad);
+
+        // Calcular la media
+        let suma = 0;
+        for ( let i = 0; i < edades.length; i++ ) {
+            suma += edades[i];
+        }
+        let media = suma / edades.length;
+
+        // Determinar color del mensaje
+        let color;
+        if (edad > 18 && edad < 65) {
+            color = "green";
+        } else {
+            color = "red";
+        }
+
+        mostrarMensaje(`${nombre} ${apellidos} tiene ${edad} años.`, color);
+        document.getElementById("mediaEdad").textContent = `Media de edades introducidas: ${media} años`;
+    }
+
+    function mostrarMensaje(texto, color) {
+        const mensaje = document.getElementById("mensaje");
+        mensaje.textContent = texto;
+        mensaje.style.color = color;
+    }
+</script>
+</body>
+</html>

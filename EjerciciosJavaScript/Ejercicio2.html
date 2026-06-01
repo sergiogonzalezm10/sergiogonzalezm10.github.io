@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 2</title>
+</head>
+<body>
+
+<h3>Comprueba si un número es par o impar:</h3>
+<input type="number" id="numeroParImpar" placeholder="Introduce un número">
+<button id="comprobar">Comprobar</button>
+<p id="resultadoParImpar"></p>
+
+<br>
+<br>
+
+<h3>Comprueba si tienes la edad para votar o no</h3>
+<input type="number" id="edad" placeholder="Introduce tu edad">
+<button id="boton">Enviar</button>
+<p id="resultadovotar"></p>
+
+<br>
+<br>
+
+<h3>Bucle números del 1 al 10</h3>
+<p id="resultadoBucle"></p>
+<button id="botonBucle">Imprimir</button>
+
+<br>
+<br>
+<br>
+
+<h3>Bucle números pares del 1 al 10</h3>
+<p id="resultadoBuclePares"></p>
+<button id="botonBuclePares">Imprimir</button>
+
+<br>
+<br>
+<br>
+
+<h3>Suma de los números del 1 al 100</h3>
+<p id="resultadoSuma"></p>
+<button id="botonSuma">Imprimir</button>
+
+<br>
+<br>
+<br>
+
+<h3>Ejercicios 3,4,5 con Inicio y Fin (Dos números)</h3>
+<h4>Ejercicio 3 Actualizado</h4>
+<p id="resultadoBucleActualizado"></p>
+<input type="number" id="numero1" placeholder="Introduce el numero inicial">
+<input type="number" id="numero2" placeholder="Introduce el numero final">
+<button id="botonBucleActualizado">Imprimir</button>
+
+<br>
+
+<h4>Ejercicio 4 actualizado</h4>
+<p id="resultadoBucleParesActualizado"></p>
+<button id="botonBucleParesActualizado">Imprimir</button>
+<input type="number" id="numero3" placeholder="Introduce el numero inicial">
+<input type="number" id="numero4" placeholder="Introduce el numero final">
+
+<br>
+
+<h4>Ejecicio 5 actualizado</h4>
+<p id="resultadoSumaActualizado"></p>
+<button id="botonSumaActualizado">Imprimir</button>
+<input type="number" id="numero5" placeholder="Introduce el numero inicial">
+<input type="number" id="numero6" placeholder="Introduce el numero final">
+
+<br>
+
+</body>
+<br>
+<br>
+<br>
+<script>
+    const botonParImpar = document.getElementById('comprobar');
+    const resultadoParImpar = document.getElementById('resultadoParImpar');
+    const numeroParImpar = document.getElementById('numeroParImpar');
+
+    botonParImpar.addEventListener('click', function (){
+        if (numeroParImpar.value === "") {
+            resultadoParImpar.textContent = "Introduce un número válido";
+        } else if (numeroParImpar.value % 2 === 0) {
+            resultadoParImpar.textContent = "El número es par";
+        } else {
+            resultadoParImpar.textContent = "El número es impar";
+        }
+    });
+
+    const botonvoto = document.getElementById('boton');
+    const resultadovoto = document.getElementById('resultadovotar');
+    const edadvoto = document.getElementById('edad');
+
+    botonvoto.addEventListener('click', function (){
+        if ( edadvoto.value === "" || edadvoto.value === "") {
+            resultadovoto.textContent = "Introduce una edad válida"
+        } else if ( edadvoto.value >= 18) {
+            resultadovoto.textContent = "¡Enhorabuena, puedes votar!"
+        } else {
+            resultadovoto.textContent = "Lo sentimos, aún no tienes la edad para votar"
+        }
+    });
+
+    const botonImprimir = document.getElementById('botonBucle');
+    const resultadoBucle = document.getElementById('resultadoBucle');
+
+    botonImprimir.addEventListener('click', function (){
+        resultadoBucle.textContent = "";
+        for (let i = 1; i <= 10; i++) {
+            resultadoBucle.textContent += i + " ";
+        }
+    });
+
+    const botonPares = document.getElementById('botonBuclePares');
+    const resultadoBuclePares = document.getElementById('resultadoBuclePares');
+
+    botonPares.addEventListener('click', function (){
+        resultadoBuclePares.textContent = "";
+        for (let i = 1; i <= 10; i++) {
+            if ( i % 2 === 0) {
+                resultadoBuclePares.textContent += i + " ";
+            }
+        }
+    });
+
+    const botonSuma = document.getElementById('botonSuma');
+    const resultadoSuma = document.getElementById('resultadoSuma');
+    let suma = 0;
+    botonSuma.addEventListener('click', function (){
+        for (let i = 1; i <= 100; i++) {
+            suma = suma + i;
+        }
+        resultadoSuma.textContent = suma;
+    })
+
+    const botonImprimirActualizado = document.getElementById('botonBucleActualizado');
+    const resultadoBucleActualizado = document.getElementById('resultadoBucleActualizado');
+    const numeroInicio = document.getElementById('numero1');
+    const numeroFinal = document.getElementById('numero2');
+
+    botonImprimirActualizado.addEventListener('click', function (){
+        resultadoBucleActualizado.textContent = "";
+        for (let i = numeroInicio.value; i <= numeroFinal.value; i++) {
+            resultadoBucleActualizado.textContent += i + " ";
+        }
+    });
+
+    const botonParesActualizado = document.getElementById('botonBucleParesActualizado');
+    const resultadoBucleParesActualizado = document.getElementById('resultadoBucleParesActualizado');
+    const numeroInicial3 = document.getElementById('numero3');
+    const numeroFinal3 = document.getElementById('numero4');
+
+    botonParesActualizado.addEventListener('click', function (){
+        resultadoBucleParesActualizado.textContent = "";
+        for (let i = numeroInicial3.value; i <= numeroFinal3.value; i++) {
+            if ( i % 2 === 0) {
+                resultadoBucleParesActualizado.textContent += i + " ";
+            }
+        }
+    });
+
+    const botonSumaActualizado = document.getElementById('botonSumaActualizado');
+    const resultadoSumaActualizado = document.getElementById('resultadoSumaActualizado');
+    const numeroInicial5Actualizado = document.getElementById('numero5');
+    const numeroFinal6Actualizado = document.getElementById('numero6');
+
+    botonSumaActualizado.addEventListener('click', function () {
+        let inicio = Number(numeroInicial5Actualizado.value);
+        let fin = Number(numeroFinal6Actualizado.value);
+        let sumaActualizado = 0;
+
+        if (isNaN(inicio) || isNaN(fin)) {
+            resultadoSumaActualizado.textContent = "Introduce valores válidos";
+        } else if (inicio > fin) {
+            resultadoSumaActualizado.textContent = "El número inicial debe ser menor o igual al final";
+        } else {
+            for (let i = inicio; i <= fin; i++) {
+                sumaActualizado += i;
+            }
+            resultadoSumaActualizado.textContent = sumaActualizado;
+        }
+    });
+
+</script>
+</html>

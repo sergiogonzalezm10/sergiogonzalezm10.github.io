@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 7</title>
+</head>
+<body>
+<input type="text" id="textoInput" placeholder="Introduce texto">
+<button onclick="añadirlista()">Añadir a la lista</button>
+<ul id="lista">
+
+</ul>
+</body>
+<script>
+
+    function añadirlista() {
+        let texto = document.getElementById("textoInput").value.trim();
+        if (texto === "") return;
+
+        let li = document.createElement("li");
+
+        let span = document.createElement("span");
+        span.textContent = texto;
+
+        // Botón eliminar
+        let btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "X";
+        btnEliminar.onclick = function() {
+            li.remove();
+        };
+
+        // Botón subir
+        let btnSubir = document.createElement("button");
+        btnSubir.textContent = "↑";
+        btnSubir.onclick = function() {
+            let prev = li.previousElementSibling;
+            if (prev) li.parentNode.insertBefore(li, prev);
+        };
+
+        // Botón bajar
+        let btnBajar = document.createElement("button");
+        btnBajar.textContent = "↓";
+        btnBajar.onclick = function() {
+            let next = li.nextElementSibling;
+            if (next) li.parentNode.insertBefore(next, li);
+        };
+
+        li.appendChild(span);
+        li.appendChild(btnSubir);
+        li.appendChild(btnBajar);
+        li.appendChild(btnEliminar);
+
+        document.getElementById("lista").appendChild(li);
+
+        document.getElementById("textoInput").value = "";
+        document.getElementById("textoInput").focus();
+    }
+</script>
+</script>
+</html>
