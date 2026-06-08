@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 5 - Blog con comentarios</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        h1 { color: #2c3e50; }
+        h2 { color: #666; font-size: 1rem; margin-bottom: 30px; }
+
+        /* Controles del número de posts y el botón */
+        .controles {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        label { color: #555; }
+        select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+        button {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        button:hover { background: #34495e; }
+
+        /* Cada tarjeta de post */
+        .post {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 16px;
+        }
+        .post h3 {
+            margin: 0 0 8px;
+            color: #2c3e50;
+            font-size: 1rem;
+            text-transform: capitalize;
+        }
+        .post p {
+            margin: 0 0 12px;
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Botón pequeño para ver los comentarios de ese post */
+        .btn-comentarios {
+            background: #ecf0f1;
+            color: #2c3e50;
+            border: 1px solid #bdc3c7;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        .btn-comentarios:hover { background: #dfe6e9; }
+
+        /* Caja de comentarios que aparece al pulsar el botón */
+        .zona-comentarios {
+            margin-top: 14px;
+            display: none; /* oculta por defecto */
+            border-top: 1px solid #eee;
+            padding-top: 12px;
+        }
+
+        /* Cada comentario individual */
+        .comentario {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-left: 3px solid #3498db;
+            border-radius: 0 4px 4px 0;
+        }
+        .comentario .autor {
+            font-size: 0.8rem;
+            color: #3498db;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        .comentario .texto {
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        #cargando-posts { color: #999; }
+        #lista-posts    { margin-top: 16px; }
+    </style>
+</head>
+<body>
+
+<h1>Ejercicio 5: Blog con comentarios</h1>
+<h2>Mario Laso</h2>
+
+<!-- Selector de cuántos posts ver y botón de cargar -->
+<div class="controles">
+    <label for="num-posts">Número de posts:</label>
+    <select id="num-posts">
+        <option value="3">3</option>
+        <option value="5" selected>5</option>
+        <option value="10">10</option>
+    </select>
+    <button id="btn-cargar">Cargar posts</button>
+</div>
+
+<p id="cargando-posts" style="display:none;">Cargando posts...</p>
+
+<!-- Aquí se pintarán las tarjetas de posts -->
+<div id="lista-posts"></div>
+
+
+<script>
+    $(function () {
+
+        // Función que carga los posts de la API
+        function cargarPosts() {
+
+            // Leemos cuántos posts quiere ver el usuario
+            var cantidad = $('#num-posts').val();
+
+            // Limpiamos los posts anteriores y mostramos carga
+            $('#lista-posts').empty();
+            $('#cargando-posts').show();
+            $('#btn-cargar').prop('disabled', true);
+
+            // Petición GET a JSONPlaceholder
+            // Esta API es de prueba y devuelve datos falsos pero con estructura real
+            // El parámetro _limit limita cuántos posts recibimos
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/posts?_limit=' + cantidad,
+                method: 'GET',
+                dataType: 'json',
+
+                success: function (posts) {
+                    $('#cargando-posts').hide();
+                    $('#btn-cargar').prop('disabled', false);
+
+                    // Recorremos el array de posts con $.each
+                    // Cada "post" es un objeto con: id, title, body, userId
+                    $.each(posts, function (indice, post) {
+
+                        // Creamos la tarjeta HTML para este post
+                        var $tarjeta = $('<div>').addClass('post');
+                        var $titulo  = $('<h3>').text(post.title);
+                        var $cuerpo  = $('<p>').text(post.body);
+
+                        // Botón para cargar los comentarios de este post concreto
+                        var $btnComentarios = $('<button>')
+                            .addClass('btn-comentarios')
+                            .text('Ver comentarios')
+                            .attr('data-post-id', post.id)  // guardamos el id del post en el botón
+                            .attr('data-cargados', 'no');    // marcamos que aún no los hemos cargado
+
+                        // Zona oculta donde aparecerán los comentarios al pulsar el botón
+                        var $zonaComentarios = $('<div>').addClass('zona-comentarios');
+
+                        // Montamos la tarjeta
+                        $tarjeta.append($titulo).append($cuerpo).append($btnComentarios).append($zonaComentarios);
+
+                        // La añadimos a la lista de posts
+                        $('#lista-posts').append($tarjeta);
+
+
+                        // Evento del botón de comentarios de ESTE post
+                        $btnComentarios.on('click', function () {
+
+                            var postId   = $(this).attr('data-post-id');
+                            var cargados = $(this).attr('data-cargados');
+
+                            // Si ya cargamos los comentarios antes, solo los mostramos u ocultamos
+                            // Esto evita hacer la misma petición dos veces
+                            if (cargados === 'si') {
+                                $zonaComentarios.toggle(); // toggle: si está visible lo oculta y viceversa
+                                return;
+                            }
+
+                            // Primera vez: pedimos los comentarios a la API
+                            $(this).text('Cargando...').prop('disabled', true);
+
+                            // Petición GET para los comentarios de este post
+                            // La URL incluye el id del post para filtrar
+                            $.ajax({
+                                url: 'https://jsonplaceholder.typicode.com/posts/' + postId + '/comments',
+                                method: 'GET',
+                                dataType: 'json',
+
+                                success: function (comentarios) {
+
+                                    // Marcamos que ya cargamos los comentarios para no repetir la petición
+                                    $btnComentarios.attr('data-cargados', 'si');
+                                    $btnComentarios.text('Ocultar comentarios (' + comentarios.length + ')').prop('disabled', false);
+
+                                    // Recorremos los comentarios y los añadimos a la zona
+                                    // Cada comentario tiene: id, name (autor), email, body (texto)
+                                    $.each(comentarios, function (i, comentario) {
+                                        var $com = $('<div>').addClass('comentario');
+                                        var $autor  = $('<div>').addClass('autor').text(comentario.email);
+                                        var $texto  = $('<div>').addClass('texto').text(comentario.body);
+                                        $com.append($autor).append($texto);
+                                        $zonaComentarios.append($com);
+                                    });
+
+                                    // Mostramos la zona de comentarios
+                                    $zonaComentarios.slideDown();
+
+                                    console.log('Comentarios del post ' + postId + ':', comentarios);
+                                },
+
+                                error: function () {
+                                    $btnComentarios.text('Error al cargar').prop('disabled', false);
+                                }
+                            });
+
+                        }); // fin click comentarios
+
+                    }); // fin $.each posts
+
+                    console.log('Posts recibidos:', posts);
+                },
+
+                error: function () {
+                    $('#cargando-posts').hide().text('');
+                    $('#btn-cargar').prop('disabled', false);
+                    $('#lista-posts').html('<p style="color:red;">Error al cargar los posts.</p>');
+                }
+            });
+        }
+
+        // El botón "Cargar posts" llama a la función
+        $('#btn-cargar').on('click', function () {
+            cargarPosts();
+        });
+
+        // Cargamos los posts automáticamente al abrir la página
+        cargarPosts();
+
+    });
+</script>
+
+</body>
+</html>
