@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 4 - Trivia</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 620px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #1a1a2e;
+            color: #eee;
+        }
+        h1 { color: #e94560; }
+        h2 { color: #aaa; font-size: 1rem; }
+
+        /* Caja que muestra la pregunta actual */
+        #caja-pregunta {
+            background: #16213e;
+            border: 1px solid #0f3460;
+            border-radius: 10px;
+            padding: 24px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        /* Número de pregunta y categoría */
+        #categoria {
+            font-size: 0.8rem;
+            color: #e94560;
+            margin-bottom: 8px;
+        }
+
+        /* Texto de la pregunta */
+        #pregunta {
+            font-size: 1.15rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* Contenedor de las opciones de respuesta */
+        #opciones {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Cada botón de opción de respuesta */
+        .btn-opcion {
+            background: #0f3460;
+            color: #eee;
+            border: 1px solid #1a4a7a;
+            padding: 12px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.95rem;
+            transition: background 0.2s;
+        }
+        .btn-opcion:hover:not(:disabled) { background: #1a5490; }
+
+        /* Color verde para la respuesta correcta */
+        .btn-opcion.correcta { background: #27ae60; border-color: #27ae60; }
+
+        /* Color rojo para la respuesta incorrecta */
+        .btn-opcion.incorrecta { background: #c0392b; border-color: #c0392b; }
+
+        /* Cuando los botones están bloqueados no cambian de color al pasar el ratón */
+        .btn-opcion:disabled { cursor: not-allowed; opacity: 0.8; }
+
+        /* Marcador de puntuación */
+        #marcador {
+            font-size: 1.1rem;
+            color: #e94560;
+            margin: 10px 0;
+        }
+
+        /* Mensaje de resultado que aparece tras responder */
+        #resultado {
+            margin-top: 16px;
+            font-weight: bold;
+            min-height: 24px;
+        }
+
+        button.btn-principal {
+            background: #e94560;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+        button.btn-principal:hover { background: #c0392b; }
+
+        #cargando { color: #aaa; display: none; }
+    </style>
+</head>
+<body>
+
+<h1>Ejercicio 4: Trivia</h1>
+<h2>Mario Laso</h2>
+
+<!-- Marcador de aciertos sobre total de preguntas -->
+<div id="marcador">Puntuación: 0 / 0</div>
+
+<!-- Botón para pedir la siguiente pregunta -->
+<button class="btn-principal" id="btn-siguiente">Nueva pregunta</button>
+
+<p id="cargando">Cargando pregunta...</p>
+
+<!-- Caja donde se muestra la pregunta y las opciones -->
+<div id="caja-pregunta">
+    <div id="categoria"></div>
+    <p id="pregunta"></p>
+    <div id="opciones"></div>
+    <p id="resultado"></p>
+</div>
+
+
+<script>
+    $(function () {
+
+        // Variables que guardan la puntuación del jugador
+        var aciertos = 0;
+        var totalPreguntas = 0;
+
+        // Función que mezcla un array en orden aleatorio
+        // Esto nos sirve para que las respuestas no aparezcan siempre en el mismo orden
+        function mezclarArray(array) {
+            // Copiamos el array para no modificar el original
+            var copia = array.slice();
+            // Algoritmo de mezcla: intercambia elementos aleatoriamente
+            for (var i = copia.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = copia[i];
+                copia[i] = copia[j];
+                copia[j] = temp;
+            }
+            return copia;
+        }
+
+        // Función que decodifica el texto HTML que devuelve la API
+        // La API manda cosas como "&amp;" en vez de "&", esto lo convierte
+        function decodificarHTML(texto) {
+            // Creamos un elemento temporal en memoria y dejamos que el navegador lo decodifique
+            return $('<textarea>').html(texto).text();
+        }
+
+        // Función principal: pide una pregunta nueva a la API
+        function pedirPregunta() {
+
+            // Ocultamos la caja anterior y mostramos carga
+            $('#caja-pregunta').hide();
+            $('#cargando').show();
+            $('#btn-siguiente').prop('disabled', true);
+
+            // Petición GET a Open Trivia Database
+            // amount=1 -> una sola pregunta
+            // type=multiple -> tipo test con 4 opciones
+            // La API devuelve la respuesta correcta y tres incorrectas por separado
+            $.ajax({
+                url: 'https://opentdb.com/api.php?amount=1&type=multiple',
+                method: 'GET',
+                dataType: 'json',
+
+                success: function (datos) {
+                    $('#cargando').hide();
+
+                    // Los datos vienen dentro de results, que es un array
+                    // Como solo pedimos 1 pregunta, cogemos la posición 0
+                    var preguntaObj = datos.results[0];
+
+                    // Decodificamos los textos porque la API manda caracteres HTML escapados
+                    var textoPregunta   = decodificarHTML(preguntaObj.question);
+                    var correcta        = decodificarHTML(preguntaObj.correct_answer);
+                    var incorrectas     = preguntaObj.incorrect_answers.map(decodificarHTML);
+
+                    // Juntamos la correcta con las incorrectas en un solo array
+                    // y las mezclamos para que no aparezca siempre en el mismo sitio
+                    var todasLasOpciones = mezclarArray([correcta].concat(incorrectas));
+
+                    // Mostramos la categoría y la pregunta en pantalla
+                    $('#categoria').text('Categoría: ' + preguntaObj.category);
+                    $('#pregunta').text(textoPregunta);
+                    $('#resultado').text('');
+
+                    // Limpiamos los botones de la pregunta anterior
+                    $('#opciones').empty();
+
+                    // Creamos un botón por cada opción de respuesta
+                    $.each(todasLasOpciones, function (indice, opcion) {
+
+                        var $boton = $('<button>')
+                            .addClass('btn-opcion')
+                            .text(opcion);
+
+                        // Cuando el usuario pulse una opción
+                        $boton.on('click', function () {
+
+                            // Bloqueamos todos los botones para que no pueda cambiar de respuesta
+                            $('.btn-opcion').prop('disabled', true);
+
+                            totalPreguntas++;
+
+                            // Comprobamos si la opción elegida es la correcta
+                            if (opcion === correcta) {
+                                // Respuesta correcta: pintamos el botón de verde
+                                $(this).addClass('correcta');
+                                aciertos++;
+                                $('#resultado').css('color', '#27ae60').text('Correcto!');
+                            } else {
+                                // Respuesta incorrecta: pintamos este de rojo y el correcto de verde
+                                $(this).addClass('incorrecta');
+                                // Buscamos el botón que contenía la respuesta correcta y lo marcamos
+                                $('.btn-opcion').each(function () {
+                                    if ($(this).text() === correcta) {
+                                        $(this).addClass('correcta');
+                                    }
+                                });
+                                $('#resultado').css('color', '#c0392b').text('Incorrecto! La correcta era: ' + correcta);
+                            }
+
+                            // Actualizamos el marcador con la nueva puntuación
+                            $('#marcador').text('Puntuación: ' + aciertos + ' / ' + totalPreguntas);
+
+                            // Desbloqueamos el botón de siguiente pregunta
+                            $('#btn-siguiente').prop('disabled', false);
+                        });
+
+                        // Añadimos el botón al contenedor de opciones
+                        $('#opciones').append($boton);
+                    });
+
+                    // Mostramos la caja de pregunta con animación
+                    $('#caja-pregunta').fadeIn();
+
+                    console.log('Pregunta recibida:', preguntaObj);
+                },
+
+                error: function () {
+                    $('#cargando').hide();
+                    alert('Error al cargar la pregunta. Intenta de nuevo.');
+                    $('#btn-siguiente').prop('disabled', false);
+                }
+            });
+        }
+
+        // El botón "Nueva pregunta" llama a la función pedirPregunta
+        $('#btn-siguiente').on('click', function () {
+            pedirPregunta();
+        });
+
+        // Cargamos la primera pregunta automáticamente al abrir la página
+        pedirPregunta();
+
+    });
+</script>
+
+</body>
+</html>
