@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 2 - Chiste del día</title>
+
+    <!-- Cargamos jQuery desde internet para poder usarlo -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #f5f5f5;
+    }
+    h1 { color: #333; }
+    h2 { color: #666; font-size: 1rem; }
+
+    /* La caja donde aparecerá el chiste */
+    #caja-chiste {
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+        min-height: 80px;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        display: none; /* empieza oculta hasta que llegan datos */
+    }
+
+    /* La parte del remate, en negrita */
+    #remate {
+        margin-top: 12px;
+        font-weight: bold;
+        color: #c0392b;
+    }
+
+    button {
+        background: #3498db;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+    button:hover { background: #2980b9; }
+
+    /* Mensaje de carga mientras esperamos al servidor */
+    #cargando {
+        color: #999;
+        display: none;
+    }
+
+    /* Mensaje de error en rojo */
+    #error {
+        color: #c0392b;
+        display: none;
+    }
+</style>
+<body>
+
+<!-- Cabecera obligatoria con nombre del ejercicio y alumno -->
+<h1>Ejercicio 1: Chiste del día</h1>
+<h2>Mario Laso</h2>
+
+<!-- El botón que el usuario pulsará para pedir un chiste -->
+<button id="btn-chiste">Dame un chiste</button>
+
+<!-- Mensaje que aparece mientras se espera la respuesta -->
+<p id="cargando">Buscando chiste...</p>
+
+<!-- Mensaje de error si algo falla -->
+<p id="error">No se pudo cargar el chiste. Intenta de nuevo.</p>
+
+<!-- La caja donde se mostrará el chiste cuando llegue -->
+<div id="caja-chiste">
+    <!-- El texto de la pregunta o chiste simple -->
+    <p id="texto-chiste"></p>
+    <!-- El remate, solo si el chiste tiene dos partes -->
+    <p id="remate"></p>
+</div>
+
+
+<script>
+    // Esperamos a que el HTML esté cargado antes de hacer nada
+    $(function () {
+
+        // Cuando el usuario pulse el botón, pedimos un chiste
+        $('#btn-chiste').on('click', function () {
+
+            // Ocultamos la caja anterior y mostramos el mensaje de carga
+            $('#caja-chiste').hide();
+            $('#error').hide();
+            $('#cargando').show();
+
+            // Petición GET a la API de chistes
+            // Esta API no necesita contraseña ni usuario
+            // "Programming" es la categoría del chiste
+            // "lang=es" pide los chistes en español (no siempre hay)
+            $.ajax({
+                url: 'https://v2.jokeapi.dev/joke/Programming?lang=es&safe-mode',
+                method: 'GET',
+                dataType: 'json', // esperamos que el servidor nos devuelva JSON
+
+                success: function (respuesta) {
+                    // Ocultamos el mensaje de carga
+                    $('#cargando').hide();
+
+                    // La API devuelve dos tipos de chiste:
+                    // tipo "single": un solo texto
+                    // tipo "twopart": tiene pregunta y remate por separado
+                    if (respuesta.type === 'single') {
+                        // Chiste de una sola parte: lo ponemos en el párrafo
+                        $('#texto-chiste').text(respuesta.joke);
+                        $('#remate').text(''); // limpiamos el remate por si había uno antes
+
+                    } else {
+                        // Chiste de dos partes: setup es la pregunta, delivery es el remate
+                        $('#texto-chiste').text(respuesta.setup);
+                        $('#remate').text('... ' + respuesta.delivery);
+                    }
+
+                    // Ahora sí mostramos la caja con el chiste
+                    $('#caja-chiste').fadeIn();
+
+                    // Mostramos en consola lo que nos devolvió el servidor
+                    // Esto es útil para ver la estructura del JSON
+                    console.log('Respuesta de la API:', respuesta);
+                },
+
+                error: function () {
+                    // Si algo falla (sin internet, API caída...) mostramos el error
+                    $('#cargando').hide();
+                    $('#error').show();
+                    console.error('Error al contactar con la API de chistes');
+                }
+            });
+
+        }); // fin del click
+
+    }); // fin del document ready
+</script>
+
+</body>
+</html>
