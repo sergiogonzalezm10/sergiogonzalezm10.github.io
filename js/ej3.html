@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 2 - Buscador de usuarios GitHub</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        h1 { color: #24292e; }
+        h2 { color: #666; font-size: 1rem; }
+
+        /* Fila con el input y el botón juntos */
+        .fila-busqueda {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        button {
+            background: #24292e;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        button:hover { background: #444; }
+
+        /* Tarjeta donde se muestra la información del usuario */
+        #tarjeta-usuario {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            display: none;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        /* Foto de perfil redonda */
+        #tarjeta-usuario img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+        }
+
+        /* Información del usuario al lado de la foto */
+        .info h3 { margin: 0 0 6px; color: #24292e; }
+        .info p  { margin: 4px 0; color: #555; font-size: 0.9rem; }
+
+        #error    { color: #c0392b; display: none; margin-top: 10px; }
+        #cargando { color: #999;    display: none; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<h1>Ejercicio 3: Buscador de usuarios de GitHub</h1>
+<h2>Mario Laso</h2>
+
+<!-- Formulario de búsqueda: un input de texto y un botón -->
+<div class="fila-busqueda">
+    <input type="text" id="input-usuario" placeholder="Escribe un usuario de GitHub..." />
+    <button id="btn-buscar">Buscar</button>
+</div>
+
+<p id="cargando">Buscando usuario...</p>
+<p id="error">Usuario no encontrado o error de conexión.</p>
+
+<!-- Tarjeta de resultados, oculta hasta que lleguen datos -->
+<div id="tarjeta-usuario" style="display:none;">
+    <!-- La foto de perfil que devuelve GitHub -->
+    <img id="foto" src="" alt="Avatar del usuario" />
+
+    <!-- Los datos textuales del usuario -->
+    <div class="info">
+        <h3 id="nombre"></h3>
+        <p id="login-txt"></p>
+        <p id="bio"></p>
+        <p id="repos"></p>
+        <p id="seguidores"></p>
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+
+        // Esta función hace la búsqueda y la llamamos desde el botón y desde Enter
+        function buscarUsuario() {
+
+            // Leemos lo que escribió el usuario y quitamos espacios con trim()
+            var nombreUsuario = $.trim($('#input-usuario').val());
+
+            // Si el campo está vacío, no hacemos nada
+            if (nombreUsuario === '') {
+                alert('Escribe un nombre de usuario de GitHub');
+                return;
+            }
+
+            // Ocultamos tarjeta y error anteriores, mostramos carga
+            $('#tarjeta-usuario').hide();
+            $('#error').hide();
+            $('#cargando').show();
+
+            // Petición GET a la API pública de GitHub
+            // La URL incluye el nombre de usuario que buscamos
+            // La API devuelve un objeto JSON con todos los datos del perfil
+            $.ajax({
+                url: 'https://api.github.com/users/' + nombreUsuario,
+                method: 'GET',
+                dataType: 'json',
+
+                success: function (usuario) {
+                    $('#cargando').hide();
+
+                    // Rellenamos cada elemento con los datos que llegaron del JSON
+                    // usuario.avatar_url -> la URL de la foto de perfil
+                    // usuario.name      -> el nombre real (puede ser null)
+                    // usuario.login     -> el nombre de usuario de GitHub
+                    // usuario.bio       -> la descripción que tiene en su perfil
+                    // usuario.public_repos -> número de repositorios públicos
+                    // usuario.followers    -> número de seguidores
+                    $('#foto').attr('src', usuario.avatar_url);
+                    $('#nombre').text(usuario.name || 'Sin nombre');
+                    $('#login-txt').text('@' + usuario.login);
+                    $('#bio').text(usuario.bio || 'Sin biografía');
+                    $('#repos').text('Repositorios: ' + usuario.public_repos);
+                    $('#seguidores').text('Seguidores: ' + usuario.followers);
+
+                    // Mostramos la tarjeta con animación
+                    $('#tarjeta-usuario').fadeIn();
+
+                    console.log('Datos del usuario recibidos:', usuario);
+                },
+
+                error: function (xhr) {
+                    $('#cargando').hide();
+
+                    // Si el servidor devuelve 404 es que el usuario no existe
+                    if (xhr.status === 404) {
+                        $('#error').text('Usuario "' + nombreUsuario + '" no encontrado en GitHub.');
+                    } else {
+                        $('#error').text('Error de conexión. Intenta de nuevo.');
+                    }
+                    $('#error').show();
+                }
+            });
+        }
+
+        // Evento del botón Buscar
+        $('#btn-buscar').on('click', function () {
+            buscarUsuario();
+        });
+
+        // También buscamos si el usuario pulsa Enter en el input
+        // El evento keydown detecta cualquier tecla pulsada
+        $('#input-usuario').on('keydown', function (evento) {
+            // evento.key nos dice qué tecla se pulsó
+            if (evento.key === 'Enter') {
+                buscarUsuario();
+            }
+        });
+
+    });
+</script>
+
+</body>
+</html>
